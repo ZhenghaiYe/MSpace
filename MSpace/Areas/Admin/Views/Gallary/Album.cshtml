@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Detail";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="@Url.Content("~/Content/widgets/masonry/jquery.masonry.js")" ></script>
+    <!-- 放大图片插件 -->
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.hoverpulse.js")" ></script>
+    <style type="text/css">
+        .item {
+            width: 350px;
+            margin: 5px;
+            padding: 5px;
+            float: left;
+            border: 1px solid #ccc;
+            background: #eee;
+            border-radius:6px;
+        }
+
+        .box_hover{
+            width: 100%;
+            background:#000;
+            z-index:10;
+            position:absolute;
+            opacity:0;
+            left:0px;
+            bottom:3px;
+            color:#FFF;
+            text-align:center;
+            font-size:12px;
+            line-height:28px;
+        }
+
+    </style>
+
+    <script type="text/javascript"> 
+        $(function () {
+            
+            //$('div.item img').hoverpulse();
+
+            var $container = $('#images');
+
+            $container.imagesLoaded(function () {
+                $container.masonry({
+                    itemSelector: '.item',
+                    isAnimated: true
+                });
+                
+            });
+
+            $('#navLink').click(function (e) {
+                e.preventDefault();
+                $.get($(this).attr('href'), function (data) {
+                    var $content = $(data);
+                    //$container.imagesLoaded(function () {
+                    //    $container.masonry('appended', $content, false);
+                    //});
+                    if ($content) {
+                        $container.append($content).masonry('appended', $content, true);
+                    }
+                    $("html, body").animate({
+                        scrollTop: $container.children('img:last').offset().top - 80 + "px"
+                    }, 1000);
+                });
+            });
+
+            //高亮显示当前，其余开启遮罩
+            //显示提示信息层
+            $(".item").live('mouseover', function () {
+                $(this).stop().fadeTo('3', 1).siblings().stop().fadeTo('3', 0.3);
+                $(this).find(".box_hover").animate({ bottom: 10, opacity: 0.65 }, { queue: false, duration: 180 });
+            }).live('mouseleave', function () {
+                $(".item").stop().fadeTo('3', 1);
+                $(this).find(".box_hover").animate({ bottom: 0, opacity: 0 }, { queue: false, duration: 180 });
+            });
+
+        });
+    </script>
+}
+
+<div>
+    <h2>相册 @Model.Name 中的照片</h2>
+</div>
+<hr />
+<div id="images">
+    <div class="item"><span class="box_hover">这里是店铺的名字</span></div><div class="item"><span class="box_hover">这里是店铺的名字</span></div>
+    @Html.Action("AlbumPage", new { albumId = Model.Id })
+</div>
+
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#x0039;</span>
+        <span class="win-label">相册列表</span>
+    </a>
+    <a class="win-command page" href="@Url.Action("Upload", "Gallary", new { id = Model.Id})">
+        <span class="win-commandimage win-commandring">&#xe01f;</span>
+        <span class="win-label">上传照片</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Download", new { id = Model.Id })">
+        <span class="win-commandimage win-commandring">&#xe01d;</span>
+        <span class="win-label">下载相册</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe18b;</span>
+        <span class="win-label">随机预览</span>
+    </a>
+    @*<a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe19b;</span>
+        <span class="win-label">排列方式</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe017;</span>
+        <span class="win-label">排列方式</span>
+    </a>*@
+}
+
+@section RightFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Album", new { id = 1})">
+        <span class="win-commandimage win-commandring">&#xe04d;</span>
+        <span class="win-label">上个相册</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Album", new { id = 5})">
+        <span class="win-commandimage win-commandring">&#xe049;</span>
+        <span class="win-label">下个相册</span>
+    </a>
+    <a class="win-command" id="navLink" href="@Url.Action("AlbumPage", "Gallary",new {albumId = Model.Id, pageIndex = 2 })">
+        <span class="win-commandimage win-commandring">&#xe0cf;</span>
+        <span class="win-label">加载更多</span>
+    </a>
+}
+
+
+   

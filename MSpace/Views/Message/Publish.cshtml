@@ -1,0 +1,47 @@
+﻿@model MSpace.Models.Message
+
+@*<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>新留言</legend>
+        <label>昵称</label>
+        @Html.TextBoxFor(_ => _.Name, new { placeholder = "这里输入您的昵称", required = "required" })
+        <span class="help-block">(必填)</span>
+        <label>邮箱</label>
+        @Html.TextBoxFor(_ => _.Email, new { placeholder = "这里输入您的邮箱" })
+        <span class="help-block">(选填，支持Gravatar)</span>
+        <label>内容</label>
+        @Html.TextAreaFor(_ => _.Name, new { placeholder = "这里输入您的内容", rows = "3", required = "required" })
+        <span class="help-block">(必填)</span>
+        <label class="checkbox">
+            <input type="checkbox"> Check me out
+        </label>
+        <button type="submit" class="btn btn-inverse">发表</button>
+    </fieldset>
+}*@
+
+<form id="messageForm">
+    <fieldset>
+        <legend>新留言</legend>
+        <label>昵称</label>
+        <input name="Name" type="text" placeholder="这里输入您的昵称" required>
+        <span class="help-block">(必填)</span>
+        <label>邮箱</label>
+        <input name="Email" type="text" placeholder="这里输入您的邮箱">
+        <span class="help-block">(选填，支持Gravatar)</span>
+        <label>内容</label>
+        <textarea name="Content" placeholder="这里输入您的内容" rows="3" required></textarea>
+        <span class="help-block">(必填)</span>
+        <label class="checkbox">
+            <input id="sendAsPrivate" type="checkbox" />作为私信发送
+        </label>
+        <button id="publishMessage" type="button" class="btn btn-inverse">发表</button>
+    </fieldset>
+</form>
+
+

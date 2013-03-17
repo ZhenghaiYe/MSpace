@@ -1,0 +1,5 @@
+﻿@model MSpace.Models.Component
+<div class="well span8">
+    <h3>@Model.Name</h3>
+    <div>@Html.Raw(@HttpUtility.HtmlDecode(@Model.Content))</div>
+</div>

@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#x0026;</span>
+        <span class="win-label">添加新闻</span>
+    </a>
+}
+
+@section RightFooter{
+    @*<a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe017;</span>
+        <span class="win-label">新闻列表</span>
+    </a>*@
+}

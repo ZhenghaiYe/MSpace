@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MSpace.Models.Contact>
+
+
+
+@foreach (var item in Model) {
+    <br />
+    <label class="checkbox">
+        <input type="checkbox" value="@Html.DisplayTextFor(modelItem => item.Id)">
+        <span class="metro-checkbox">
+            <img class="img-circle portraint" src="@Url.Content("~/Content/Images/default.jpg")" />
+            @Html.DisplayFor(modelItem => item.FullName)
+        </span>
+    </label>
+}
+

@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@section Scripts{
+          
+}
+
+<div id="signin"></div>
+<script>
+    WL.init({
+        client_id: '000000004C0E2B10',
+        redirect_uri: 'http://www.cmono.net/' //window.location.href
+    });
+    WL.ui({ name: "signin", element: "signin", scope: "wl.basic" });
+</script>

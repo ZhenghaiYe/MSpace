@@ -1,0 +1,58 @@
+﻿
+
+<div id="carticleContainer" style="width: 100%; height: 400px"></div>
+
+    <script type="text/javascript">
+
+        var articleChart; // 全局变量
+        $(document).ready(function () {
+            articleChart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'carticleContainer',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '文章统计饼图'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                    percentageDecimals: 1
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            formatter: function () {
+                                return '<b>' + this.point.name + '</b>: ' + this.percentage + ' %';
+                            }
+                        }
+                    }
+                },
+
+                series: [{
+                    type: 'pie',
+                    name: '类别所占比重',
+                    data: [
+                        ['C#', 45.0],
+                        ['Java', 26.8],
+                        {
+                            name: 'Chrome',
+                            y: 12.8,
+                            sliced: true,
+                            selected: true
+                        },
+                        ['Safari', 8.5],
+                        ['Opera', 6.2],
+                        ['Others', 0.7]
+                    ]
+                }]
+
+            });
+        });
+    </script>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--此文件自动生成。请不要修改此文件的内容。-->
+<typeCache lastModified="2013/3/17 14:48:31" mvcVersionId="3cff62e5-ef21-4e58-897f-d0f1eafd3beb">
+  <assembly name="MSpace, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <module versionId="bcf7cf8e-abe7-4ce9-a93a-89c5037dc990">
+      <type>MSpace.Areas.Admin.Controllers.AdminBaseController</type>
+      <type>MSpace.Areas.Admin.Controllers.ArticleCategoryController</type>
+      <type>MSpace.Areas.Admin.Controllers.ArticleController</type>
+      <type>MSpace.Areas.Admin.Controllers.ArticleTagController</type>
+      <type>MSpace.Areas.Admin.Controllers.CalendarController</type>
+      <type>MSpace.Areas.Admin.Controllers.ComponentController</type>
+      <type>MSpace.Areas.Admin.Controllers.ContactController</type>
+      <type>MSpace.Areas.Admin.Controllers.DataController</type>
+      <type>MSpace.Areas.Admin.Controllers.DraftController</type>
+      <type>MSpace.Areas.Admin.Controllers.GallaryCategoryController</type>
+      <type>MSpace.Areas.Admin.Controllers.GallaryController</type>
+      <type>MSpace.Areas.Admin.Controllers.GallaryTagController</type>
+      <type>MSpace.Areas.Admin.Controllers.GlobalController</type>
+      <type>MSpace.Areas.Admin.Controllers.HomeController</type>
+      <type>MSpace.Areas.Admin.Controllers.LinkController</type>
+      <type>MSpace.Areas.Admin.Controllers.NewsExpressController</type>
+      <type>MSpace.Areas.Admin.Controllers.PrivateMessageController</type>
+      <type>MSpace.Areas.Admin.Controllers.PrivateMessageReplyController</type>
+      <type>MSpace.Areas.Admin.Controllers.RemindController</type>
+      <type>MSpace.Areas.Admin.Controllers.RssController</type>
+      <type>MSpace.Areas.Admin.Controllers.SiteController</type>
+      <type>MSpace.Areas.Admin.Controllers.SiteNewsController</type>
+      <type>MSpace.Areas.Admin.Controllers.SkyController</type>
+      <type>MSpace.Areas.Admin.Controllers.StatisticsController</type>
+      <type>MSpace.Areas.Admin.Controllers.TestController</type>
+      <type>MSpace.Areas.Admin.Controllers.TwitterController</type>
+      <type>MSpace.Areas.Admin.Controllers.UserController</type>
+      <type>MSpace.Areas.M.Controllers.HomeController</type>
+      <type>MSpace.Controllers.AboutController</type>
+      <type>MSpace.Controllers.AccountController</type>
+      <type>MSpace.Controllers.ArticleCommentController</type>
+      <type>MSpace.Controllers.ArticleController</type>
+      <type>MSpace.Controllers.CareerController</type>
+      <type>MSpace.Controllers.DocumentController</type>
+      <type>MSpace.Controllers.GallaryController</type>
+      <type>MSpace.Controllers.GlobalAsyncController</type>
+      <type>MSpace.Controllers.GlobalController</type>
+      <type>MSpace.Controllers.HomeController</type>
+      <type>MSpace.Controllers.MessageController</type>
+      <type>MSpace.Controllers.PluginController</type>
+      <type>MSpace.Controllers.TestController</type>
+      <type>MSpace.Controllers.UserController</type>
+    </module>
+  </assembly>
+  <assembly name="Elmah.Mvc, Version=2.0.0.37642, Culture=neutral, PublicKeyToken=null">
+    <module versionId="e5dc6038-3ba2-482c-9990-b1c3fcfff10d">
+      <type>Elmah.Mvc.ElmahController</type>
+    </module>
+  </assembly>
+</typeCache>

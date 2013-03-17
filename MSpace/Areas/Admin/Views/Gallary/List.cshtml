@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "List";
+}
+
+            <div id="listview-grid-demo" class="listview-container grid-layout">
+               <div class="mediumListIconTextItem">
+                  <img src="holder.js/60x60" class="mediumListIconTextItem-Image" />
+                  <div class="mediumListIconTextItem-Detail">
+                     <h4>Title</h4>
+                     <h6>Lorem ipsum sin ut dolorem</h6>
+                  </div>
+               </div>
+               <div class="mediumListIconTextItem">
+                  <img src="holder.js/60x60" class="mediumListIconTextItem-Image" />
+                  <div class="mediumListIconTextItem-Detail">
+                     <h4>Title</h4>
+                     <h6>Lorem ipsum sin ut dolorem</h6>
+                  </div>
+               </div>
+               <div class="mediumListIconTextItem">
+                  <img src="holder.js/60x60" class="mediumListIconTextItem-Image" />
+                  <div class="mediumListIconTextItem-Detail">
+                     <h4>Title</h4>
+                     <h6>Lorem ipsum sin ut dolorem</h6>
+                  </div>
+               </div>
+   
+               <div class="mediumListIconTextItem">
+                  <div class="icon-google-plus-3 mediumListIconTextItem-Image" ></div>
+                  <div class="mediumListIconTextItem-Detail">
+                     <h4>Title</h4>
+                     <h6>Lorem ipsum sin ut dolorem</h6>
+                  </div>
+               </div>
+               <div class="mediumListIconTextItem">
+                  <div class="icon-facebook-2 mediumListIconTextItem-Image" ></div>
+                  <div class="mediumListIconTextItem-Detail">
+                     <h4>Title</h4>
+                     <h6>Lorem ipsum sin ut dolorem</h6>
+                  </div>
+               </div>
+               <div class="mediumListIconTextItem">
+                  <div class="icon-twitter-2 mediumListIconTextItem-Image" ></div>
+                  <div class="mediumListIconTextItem-Detail">
+                     <h4>Title</h4>
+                     <h6>Lorem ipsum sin ut dolorem</h6>
+                  </div>
+               </div>
+   
+               <div class="mediumListIconTextItem">
+                  <div class="icon-images mediumListIconTextItem-Image" ></div>
+                  <div class="mediumListIconTextItem-Detail">
+                     <h4>Title</h4>
+                     <h6>Lorem ipsum sin ut dolorem</h6>
+                  </div>
+               </div>
+               <div class="mediumListIconTextItem">
+                  <div class="icon-movie mediumListIconTextItem-Image" ></div>
+                  <div class="mediumListIconTextItem-Detail">
+                     <h4>Title</h4>
+                     <h6>Lorem ipsum sin ut dolorem</h6>
+                  </div>
+               </div>
+               <div class="mediumListIconTextItem">
+                  <div class="icon-chart  mediumListIconTextItem-Image" ></div>
+                  <div class="mediumListIconTextItem-Detail">
+                     <h4>Title</h4>
+                     <h6>Lorem ipsum sin ut dolorem</h6>
+                  </div>
+               </div>
+   
+            </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function(){
+            $('#listview-grid-demo').on('click', '.mediumListIconTextItem', function(e){
+                e.preventDefault();
+                $(this).toggleClass('selected');
+            });
+
+            $('#listview-grid-demo').on('dblclick', '.mediumListIconTextItem', function (e) {
+                alert($(this));
+            });
+        });
+    </script>
+}
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Upload")">
+        <span class="win-commandimage win-commandring">&#xe01f;</span>
+        <span class="win-label">上传照片</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Download")">
+        <span class="win-commandimage win-commandring">&#xe01d;</span>
+        <span class="win-label">下载相册</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe18b;</span>
+        <span class="win-label">随机预览</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe19b;</span>
+        <span class="win-label">排列方式</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe017;</span>
+        <span class="win-label">排列方式</span>
+    </a>
+}
+    

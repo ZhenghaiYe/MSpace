@@ -1,0 +1,52 @@
+﻿@model MSpace.Models.SiteNews
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend><h2>添加站点新闻</h2></legend>
+        <br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Title, new { @class = "span6"})
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Content)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Content, new { @class = "span6", rows = 10})
+            @Html.ValidationMessageFor(model => model.Content)
+        </div>
+
+        <p>
+            <input type="submit" class="span6 btn-primary" value="添加新闻" />
+        </p>
+    </fieldset>
+}
+
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe11c;</span>
+        <span class="win-label">新闻列表</span>
+    </a>
+}
+
+@section RightFooter{
+    @*<a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe017;</span>
+        <span class="win-label">新闻列表</span>
+    </a>*@
+}

@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "List";
+}
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section1" class="metro-section tile-span-2 well">
+        <h2>帮助区域</h2>
+        <div style="height:600px;"></div>
+    </div>
+    <div id="section2" class="metro-section tile-span-6 well">
+        <table id="tbArticle" class="table table-hover table-bordered table-striped">
+            <caption><strong>文章列表</strong></caption>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>标题</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>
+</div>
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Write")">
+        <span class="win-commandimage win-commandring">&#x0026;</span>
+        <span class="win-label">编写文章</span>
+    </a>
+}
+
+<script id="articleCategoryTemplate" type="text/x-jquery-tmpl">
+    <tr>
+        <td>
+	        ${Id}
+	    </td>
+	    <td>
+            ${Title}
+	    </td>
+	    <td>
+	        <a class="edit btn-link" href="/admin/article/detail/${Id}" ><span class="icon-pencil"></span> 编辑</a> | <a class="remove btn-link"  data-val="${Id}"><span class="icon-remove"></span> 删除</a>
+	    </td>
+	</tr>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        LoadArticleCategory();
+
+        //$('#tbCategory tbody a.remove').live('click', function (event) {
+        //    event.preventDefault();
+        //    RemoveArticleCategory($(this).attr('data-val'));
+        //});
+    });
+
+    function LoadArticleCategory() {
+        $.ajax({
+            url: '/admin/article/list',
+            cache: false,
+            beforeSend: function () {
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                $('#tbArticle tbody').empty();
+                $('#articleCategoryTemplate').tmpl(data).appendTo('#tbArticle');
+            }
+        });
+    }
+
+</script>

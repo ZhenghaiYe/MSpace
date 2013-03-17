@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "RelatedArticle";
+}
+
+<h2>相似标签:&emsp;&emsp;@ViewBag.Tag</h2>
+@foreach (var item in ViewBag.Articles)
+{ 
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object" src="@Url.Content("~/Content/holder.png")">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">@item.Title</h4>
+            ...
+        </div>
+    </div>
+}

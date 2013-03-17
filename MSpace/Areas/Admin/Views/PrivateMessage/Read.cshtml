@@ -1,0 +1,59 @@
+﻿@model MSpace.Models.PrivateMessage
+
+@{
+    ViewBag.Title = "Read";
+}
+
+<h2>Reply</h2>
+
+<fieldset>
+    <legend>PrivateMessage</legend>
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="http://www.gravatar.com/avatar/@ViewBag.EmailHash?s=75&d=monsterid&r=g" >
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">@Model.Name 发表于 @Model.PublishDate</h4>
+                <!-- Nested media object -->
+                <div class="media lead">
+                     @Model.Content
+                </div>
+            </div>
+        </div>
+    
+</fieldset>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#loadReply').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('href'),
+                cache: false,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function () {
+                    
+                }
+            });
+        });
+    });
+</script>
+
+@section LeftFooter{
+    <a class="win-command" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe11f;</span>
+        <span class="win-label">查看所有私信</span>
+    </a>
+    <a class="win-command" id="loadReply" href="@Url.Action("ListReply","PrivateMessage", new { id = @Model.MessageId})">
+        <span class="win-commandimage win-commandring">&#x0059;</span>
+        <span class="win-label">查看所有回复</span>
+    </a>
+    <a class="win-command" href="@Url.Action("Reply","PrivateMessageReply", new { id = @Model.MessageId})">
+        <span class="win-commandimage win-commandring">&#x0059;</span>
+        <span class="win-label">回复私信</span>
+    </a>
+}
+
+

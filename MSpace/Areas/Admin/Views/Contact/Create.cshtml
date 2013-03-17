@@ -1,0 +1,171 @@
+﻿@model MSpace.Models.Contact
+@using MSpace.Extension
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@section Scripts{
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/admin/css/datepicker.css")">
+    <script type="text/javascript" src="@Url.Content("~/Content/admin/scripts/bootstrap-datepicker.js")"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker();
+        });
+    </script>
+
+}
+
+@using (Html.BeginForm("create", "contact", FormMethod.Post, new { data_validatable = true, id = "ContactForm", @class = "form-horizontal" }))
+{
+    <fieldset>
+        @Html.ValidationSummary(true)
+        <legend>新建联系人</legend>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.LastName, "姓", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    @Html.TextBoxFor(_ => _.LastName, new { placeholder = "输入姓"})
+                </div>  
+                @Html.ValidationMessageFor(_ => _.LastName)
+            </div>
+        </div> 
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.FirstName, "名", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-user-2"></i></span>
+                    @Html.TextBoxFor(_ => _.FirstName, new { placeholder = "输入名"})
+                </div>
+                @Html.ValidationMessageFor(_ => _.FirstName)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.Email, "电子邮件", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-mail-3"></i></span>
+                    @Html.TextBoxFor(_ => _.Email, new { placeholder = "输入电子邮件"})
+                </div>
+                @Html.ValidationMessageFor(_ => _.Email)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.Telephone, "固定电话", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-phone"></i></span>
+                    @Html.TextBoxFor(_ => _.Telephone, new { placeholder = "输入固定电话"})
+                </div>
+                @Html.ValidationMessageFor(_ => _.Telephone)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.MobilePhone, "手机号码", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-mobile"></i></span>
+                    @Html.TextBoxFor(_ => _.MobilePhone, new { placeholder = "输入手机号码"})
+                </div>
+                @Html.ValidationMessageFor(_ => _.MobilePhone)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.Address, "家庭住址", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-address"></i></span>
+                    @Html.TextBoxFor(_ => _.Address, new { placeholder = "输入家庭住址"})
+                </div>
+                @Html.ValidationMessageFor(_ => _.Address)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.Website, "个人网站", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-globe"></i></span>
+                    @Html.TextBoxFor(_ => _.Website, new { placeholder = "输入个人网站网址"})
+                </div>
+                @Html.ValidationMessageFor(_ => _.Website)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.Sina, "新浪微博", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-blogger"></i></span>
+                    @Html.TextBoxFor(_ => _.Sina, new { placeholder = "输入新浪微博"})
+                </div>
+                @Html.ValidationMessageFor(_ => _.Sina)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.Tencent, "腾讯微博", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-blogger"></i></span>
+                    @Html.TextBoxFor(_ => _.Tencent, new { placeholder = "输入腾讯微博"})
+                </div>
+                @Html.ValidationMessageFor(_ => _.Tencent)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.Birthday, "生日", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-calendar-alt-fill"></i></span>
+                    @Html.TextBoxFor(_ => _.Birthday, new { placeholder = "输入生日", @class="datepicker", @readonly = "", data_date_format="mm/dd/yyyy"})
+                </div>
+                @Html.ValidationMessageFor(_ => _.Birthday)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.Sex, "性别", new { @class = "control-label" })
+            <div class="controls">
+                <label class="radio inline">
+                    <input  data-val="true" data-val-required="性别 不能为空" checked="checked" value="男" id="Sex1" name="Sex"  type="radio"><span class="metro-radio">男</span>
+                </label>
+                <label class="radio inline">
+                    <input  data-val="true" data-val-required="性别 不能为空" value="女"  id="Sex2" name="Sex"  type="radio"><span class="metro-radio">女</span>
+                </label>
+                @Html.ValidationMessageFor(_ => _.Sex)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.GroupId, "所属组别", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-list-2"></i></span>
+                    @Html.DropDownList("GroupId", ViewBag.Groups as SelectList, "请选择")
+                </div>
+                @Html.ValidationMessageFor(_ => _.GroupId)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.MetroLabelFor(_ => _.RelationShip, "关系描述", new { @class = "control-label" })
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-card"></i></span>
+                    @Html.TextBoxFor(_ => _.RelationShip, new { placeholder = "输入关系描述" })
+                </div>
+                @Html.ValidationMessageFor(_ => _.RelationShip)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">添加</button>
+            </div>
+        </div> 
+    </fieldset>
+})
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe19b;</span>
+        <span class="win-label">查看所有联系人</span>
+    </a>
+}

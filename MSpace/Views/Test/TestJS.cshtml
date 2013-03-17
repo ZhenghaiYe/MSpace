@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "TestJS";
+}
+@section Scripts{
+    <style type="text/css">
+        .mask
+        {
+            opacity: 0.6;
+            position:absolute;
+            overflow:hidden;
+            z-index:1000;
+        }
+    </style>
+}
+<div id="testDiv" class="span4 well">33333333333333333333333333333</div>
+
+<button id="btnMask" class="btn">开启遮罩</button>
+
+<script src="@Url.Content("~/Scripts/jquery.mspace.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#btnMask').click(function () {
+            $("#testDiv").css({ perspective: 100, rotateX: 30 });
+        });
+    });
+</script>

@@ -1,0 +1,59 @@
+﻿@model MSpace.Models.Twitter
+
+@{
+    ViewBag.Title = "Write";
+}
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section1" class="metro-section tile-span-2 well">
+        <h2>导航栏</h2>
+    </div>
+    <div id="section2" class="metro-section tile-span-6 well">
+        @using (Html.BeginForm()) {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>新碎语</legend>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Content)
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Content)
+                    @Html.ValidationMessageFor(model => model.Content)
+                </div>
+
+                <p>
+                    <input type="submit" value="发表" />
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>
+</div>
+
+
+@section LeftFooter{
+    <a class="win-command" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe11f;</span>
+        <span class="win-label">查看所有</span>
+    </a>
+}
+@section RightFooter{
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1cd;</span>
+        <span class="win-label">Previous</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1ca;</span>
+        <span class="win-label">Next</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe202;</span>
+        <span class="win-label">设置</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#x0067;</span>
+        <span class="win-label">搜索</span>
+    </button>
+}

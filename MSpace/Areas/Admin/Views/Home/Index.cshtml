@@ -1,0 +1,443 @@
+﻿@{
+    ViewBag.Title = "后台管理";
+}
+    @* Body *@
+    @*<div class="container-fluid">
+        <div class="row-fluid">
+            <div class="metro span12">*@
+        <div class="metro span12">
+            <div class="metro-sections">
+
+                <div id="section1" class="metro-section tile-span-4">
+                        <h2>文章管理</h2>
+                        <a class="tile wide imagetext bg-color-blueDark" href="./tiles-templates.html">
+                            <div class="image-wrapper">
+                                @*<img src="@Url.Content("~/Content/admin/images/tile4.png")" />*@
+                                <span class="icon icon-weather"></span>
+                            </div>
+                            <div class="column-text">
+                                <div class="text4">
+                                    <ul class="unstyled">
+                                        <li><div data-icon="&#xe22d;"> 小雨转阴</div></li>
+                                        <li><div data-icon="&#xe21a;"> 0 - 10摄氏度</div></li>
+                                        <li><div data-icon="&#xe219;"> 东西南北风</div></li>
+                                        @*@{Html.RenderAction("Weather", "Global");  }*@
+                                    </ul> 
+                                </div>
+                            </div>
+                        <div class="app-label">
+                           @* @{Html.RenderAction("PublicIP", "Global");  }*@   IP地址
+                        </div>
+                    </a>
+                    <a class="tile wide imagetext wideimage bg-color-orange" href="@Url.RouteUrl(new { controller = "Article", action = "Write" })">
+                        <img src="@Url.Content("~/Content/admin/images/bigTile.png")" alt=""/>
+                        <div class="textover-wrapper bg-color-blue">
+                            <div class="text2">
+                                写日志
+                            </div>
+                        </div>
+                    </a>
+                    <a class="tile imagetext wide bg-color-greenDark" href="@Url.Action("Index", "Twitter")">
+                        <div class="image-wrapper">
+                            @*<img src="@Url.Content("~/Content/admin/images/tile4.png")" alt=""/>*@
+                            <span class="icon icon-coffee"></span>
+                        </div>
+                        <div class="column-text">
+                            <div class="text">
+                                <span data-icon="&#x0077;"></span> 碎语
+                            </div>
+                            <div class="text">
+                                <span data-icon="&#x0077;"></span> 碎语
+                            </div>
+                            <div class="text">
+                                <span data-icon="&#x0077;"></span> 碎语
+                            </div>
+                            <div class="text">
+                                <span data-icon="&#x0077;"></span> 碎语
+                            </div>
+                        </div>
+                        <div class="app-label">
+                            碎语
+                        </div>
+                    </a>
+                    <a class="tile image bg-color-greenDark" href="@Url.Action("Index", "NewsExpress")">
+                        <div class="image-wrapper">
+                            <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" alt=""/>
+                        </div>
+                        <div class="app-label">
+                            新闻速递
+                        </div>
+                    </a>
+                    <a class="tile square text tilesquareblock" href="#">
+                        <div class="text-header">日历</div>
+                        <div class="text">@DateTime.Now.ToString("yyyy年MM月dd日")</div>
+                    </a>
+                    <a class="tile app bg-color-gray" href="@Url.RouteUrl(new { controller = "Article", action = "Index" })">
+                        <div class="image-wrapper">
+                            <span class="icon icon-list-2"></span>
+                        </div>
+                        <span class="app-label">所有日志</span>
+                    </a>
+                    <a class="tile app bg-color-red" href="@Url.RouteUrl(new { controller = "Rss", action = "Index" })">
+                        <div class="image-wrapper">
+                            <span class="icon icon-rss-2"></span>
+                        </div>
+                        <span class="app-label">RSS订阅管理</span>
+                    </a>
+                    <a class="tile app bg-color-yellow" href="./images.html">
+                        <div class="image-wrapper">
+                            <span class="icon icon-images"></span>
+                        </div>
+                        <span class="app-label">草稿</span>
+                    </a>
+                    <a class="tile app bg-color-blueDark" href="@Url.RouteUrl(new { controller = "Gallary", action = "Index" })">
+                     <div class="image-wrapper">
+                        <span class="icon icon-images" ></span>
+                     </div>
+                     <span class="app-label">相册</span>
+                    </a>
+                    <a class="tile app bg-color-yellow" href="@Url.RouteUrl(new { controller = "ArticleCategory", action = "Index" })">
+                        <div class="image-wrapper">
+                            <span class="icon icon-images"></span>
+                        </div>
+                        <span class="app-label">分类</span>
+                    </a>
+                    <a class="tile app bg-color-blueDark" href="@Url.RouteUrl(new { controller = "Tag", action = "Index" })">
+                     <div class="image-wrapper">
+                        <span class="icon icon-IcoMoon" ></span>
+                     </div>
+                     <span class="app-label">标签</span>
+                    </a>
+                    <a class="tile app bg-color-red" href="@Url.Action("Index", "SiteNews")">
+                        <div class="image-wrapper">
+                            <span class="icon icon-newspaper"></span>
+                        </div>
+                        <span class="app-label">站点新闻</span>
+                    </a>
+                </div>
+
+                <div id="section2" class="metro-section tile-span-3">
+                    <h2>拓展功能</h2>
+                    <a class="tile app bg-color-red" href="@Url.Action("Index", "Remind")">
+                        <div class="image-wrapper">
+                            <span class="icon icon-alert"></span>
+                        </div>
+                        <div class="app-label">提醒</div>
+                        <div class="app-count">12</div>
+                    </a>
+                    <a class="tile app" href="@Url.Action("Index", "PrivateMessage")">
+                        <div class="image-wrapper">
+                            <span class="icon icon-chat"></span>
+                        </div>
+                        <div class="app-label">私信</div>
+                        <div class="app-count">12</div>
+                    </a>
+                    <a class="tile app bg-color-yellow" href="#">
+                        <div class="image-wrapper">
+                           <span class="icon icon-comments-4"></span>
+                        </div>
+                        <div class="app-label">评论</div>
+                        <div class="app-count">12</div>
+                    </a>
+                    <a class="tile app bg-color-yellow" href="@Url.Action("Index", "Calendar")">
+                        <div class="image-wrapper">
+                            <span class="icon icon-calendar-alt-stroke"></span>
+                        </div>
+                        <span class="app-label">日历</span>
+                    </a>
+                    <a class="tile app bg-color-red" href="@Url.Action("Index", "Contact")">
+                        <div class="image-wrapper">
+                            <span class="icon icon-card"></span>
+                        </div>
+                        <span class="app-label">联系人</span>
+                    </a>
+                    <a class="tile app bg-color-pink" href="./images.html">
+                        <div class="image-wrapper">
+                            <span class="icon icon-mail"></span>
+                        </div>
+                        <span class="app-label">邮箱</span>
+                    </a> 
+                    <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+                        <div class="image-wrapper">
+                            <span class="icon icon-link-2"></span>
+                        </div>
+                        <span class="app-label">快捷导航</span>
+                    </a> 
+                    <a class="tile app bg-color-gray" href="./images.html">
+                        <div class="image-wrapper">
+                            <span class="icon icon-reddit"></span>
+                        </div>
+                        <span class="app-label">icon-reddit</span>
+                    </a>  
+                </div>
+
+                <div id="section3" class="metro-section tile-span-3">
+                    <h2>功能</h2>
+                    <a class="tile app bg-color-green" href="@Url.RouteUrl(new { controller = "Statistics", action = "Index" })"">
+                        <div class="image-wrapper">
+                            <span class="icon icon-chart"></span>
+                        </div>
+                        <span class="app-label">统计</span>
+                    </a>
+                    <a class="tile app bg-color-yellow" href="@Url.Action("Index", "Data")">
+                        <div class="image-wrapper">
+                            <span class="icon icon-database"></span>
+                        </div>
+                        <span class="app-label">数据</span>
+                    </a>
+                    <a class="tile app bg-color-purple" href="@Url.Action("Index", "Sky")">
+                        <div class="image-wrapper">
+                            <span class="icon icon-cloud-3"></span>
+                        </div>
+                        <span class="app-label">云端</span>
+                    </a>
+                     <a class="tile app bg-color-green" href="@Url.RouteUrl(new { controller = "Component", action = "Index" })"">
+                        <div class="image-wrapper">
+                            <span class="icon icon-puzzle"></span>
+                        </div>
+                        <span class="app-label">侧边栏组件</span>
+                    </a>
+                </div>
+
+                <div id="section4" class="metro-section tile-span-4">
+                    <h2>相册列表</h2>
+                    <a class="tile wide imagetext bg-color-blue" href="./scaffolding.html">
+                        <div class="image-wrapper">
+                            <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" />
+                        </div>
+                        <div class="column-text">
+                            <div class="text">Grid system</div>
+                            <div class="text">Layouts</div>
+                            <div class="text">Responsive design</div>
+                        </div>
+                        <span class="app-label">最新</span>
+                    </a>
+                    <a class="tile wide imagetext bg-color-blueDark" href="./base-css.html">
+                        <div class="image-wrapper">
+                            <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" />
+                        </div>
+                        <div class="column-text">
+                            <div class="text">Typography</div>
+                            <div class="text">Tables</div>
+                            <div class="text">Forms</div>
+                            <div class="text">Buttons</div>
+                        </div>
+                        <span class="app-label">大学</span>
+                    </a>
+                    <a class="tile app bg-color-orange" href="./components.html">
+                        <div class="image-wrapper">
+                            <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" alt="" />
+                        </div>
+                        <span class="app-label">生活</span>
+                    </a>
+                    <a class="tile app bg-color-red" href="./javascript.html">
+                        <div class="image-wrapper">
+                            <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" alt="" />
+                        </div>
+                        <span class="app-label">学习</span>
+                    </a>
+                </div>
+                
+                <div id="section5" class="metro-section tile-span-2">
+                    <h2>功能管理</h2>
+                        <div class="tile tile-double bg-color-blue">
+                            <div class="tile-icon-large">
+                                <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" />
+                            </div>
+                            <span class="tile-label">网盘</span>
+                        </div>
+                        <div class="tile bg-color-blueDark">
+                            <div class="tile-icon-large">
+                                <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" />
+                            </div>
+                            <span class="tile-label">数据备份</span>
+                        </div>
+                        <div class="tile bg-color-red">
+                            <div class="tile-icon-large">
+                                <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" />
+                            </div>
+                            <span class="tile-label">数据导入导出</span>
+                        </div>
+                        <div class="tile bg-color-green">
+                            <div class="tile-icon-large">
+                                <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" />
+                            </div>
+                            <span class="tile-label">友链</span>
+                        </div>
+                        <div class="tile bg-color-yellow">
+                            <div class="tile-icon-large">
+                                <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" />
+                            </div>
+                            <span class="tile-label">关闭博客</span>
+                        </div>
+                    </div>
+                
+                <div id="section6" class="metro-section tile-span-4">
+                    <h2>磁贴示例</h2>
+                    <a class="tile square text tilesquareblock" href="#">
+                        <div class="text-big">22</div>
+                        <div class="text">Text field 2</div>
+                    </a>
+                    <a class="tile square text" href="#">
+                        <div class="text-header">Header</div>
+                        <div class="text">Text field 1</div>
+                        <div class="text">Text field 2</div>
+                        <div class="text">Text field 3</div>
+                    </a>
+                    <a class="tile square image" href="#">
+                        <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" alt=""/>
+                    </a>
+                    <a class="tile squarepeek" href="#">
+                        <img src="@Url.Content("~/Content/admin/images/bigTile1.png")" alt=""/>
+                        <div class="text-inner">
+                            <div class="text-header">Header</div>
+                            <div class="text">Text field 1</div>
+                            <div class="text">Text field 2</div>
+                            <div class="text">Text field 3</div>
+                        </div>
+                    </a>
+                    <a class="tile widepeek" href="#">
+                        <div class="tile-image-wrapper">
+                            <img src="http://aozora.github.com/bootmetro/content/img/tile-wide.jpg" alt=""/>
+                        </div>
+                        <div class="text">Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</div>
+                    </a>
+                    <a class="tile wide app" href="#">
+                        <div class="image-wrapper">
+                            <img src="http://aozora.github.com/bootmetro/content/img/Windows 8.png" alt=""/>
+                        </div>
+                        <div class="app-label">AppName</div>
+                        <div class="app-count">12</div>
+                    </a>
+                    <a class="tile wide text" href="#">
+                        <div class="text-header">Header</div>
+                        <div class="text">Text field 1</div>
+                        <div class="text">Text field 2</div>
+                        <div class="text">Text field 3</div>
+                        <div class="text">Text field 4</div>
+                    </a>
+                    <a class="tile wide text" href="#">
+                        <div class="text-header">Header</div>
+                        <div class="column">
+                            <div class="text">Text field 1</div>
+                            <div class="text">Text field 2</div>
+                            <div class="text">Text field 3</div>
+                            <div class="text">Text field 4</div>
+                        </div>
+                        <div class="column">
+                            <div class="text">Text field 5</div>
+                            <div class="text">Text field 6</div>
+                            <div class="text">Text field 7</div>
+                            <div class="text">Text field 8</div>
+                        </div>
+                    </a>
+                    <a class="tile wide text" href="#">
+                           <div class="text-header">Header</div>
+                           <div class="column2-label">
+                              <div class="text">label 1</div>
+                              <div class="text">label 2</div>
+                              <div class="text">label 3</div>
+                              <div class="text">label 4</div>
+                           </div>
+                           <div class="column2-text">
+                              <div class="text">Vivamus elementum semper nisi</div>
+                              <div class="text">Vivamus elementum semper nisi</div>
+                              <div class="text">Vivamus elementum semper nisi</div>
+                              <div class="text">Vivamus elementum semper nisi</div>
+                           </div>
+                        </a>
+                    <a class="tile wide image" href="#">
+                           <img src="http://aozora.github.com/bootmetro/content/img/tile-wide.jpg" alt=""/>
+                        </a>
+                    <a class="tile wide image collection" href="#">
+                           <img class="tile-image-main" src="http://aozora.github.com/bootmetro/content/img/sample1.png" alt=""/>
+                           <div class="mini-tiles">
+                              <img src="http://aozora.github.com/bootmetro/content/img/tile-wide-collection-1.jpg" alt=""/>
+                              <img src="http://aozora.github.com/bootmetro/content/img/tile-wide-collection-2.png" alt=""/>
+                              <img src="http://aozora.github.com/bootmetro/content/img/tile-wide-collection-3.gif" alt=""/>
+                              <img src="http://aozora.github.com/bootmetro/content/img/tile-wide-collection-4.png" alt=""/>
+                           </div>
+                        </a>
+                     <a class="tile wide imagetext wideimage" href="#">
+                           <img src="http://aozora.github.com/bootmetro/content/img/tile-wide.jpg" alt=""/>
+                           <div class="textover-wrapper">
+                              <div class="text">Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</div>
+                              <div class="text">Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</div>
+                           </div>
+                        </a>
+                    <a class="tile wide imagetext" href="#">
+                           <div class="image-wrapper">
+                              <img src="http://aozora.github.com/bootmetro/content/img/tile-wide-collection-3.gif" alt=""/>
+                           </div>
+                           <div class="column-text">
+                              <div class="text-header">Adipisci velit, sed quia non numquam eius modi tempora.</div>
+                              <div class="text">Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</div>
+                              <div class="text">Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</div>
+                              <div class="text">Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</div>
+                              <div class="text">Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</div>
+                          </div>
+                        </a>
+                    <a class="tile tilewideblockandtext02" href="#">
+                           <div class="tile-column">
+                              <img src="http://aozora.github.com/bootmetro/content/img/tile-wide.jpg" alt=""/>
+                           </div>
+                        </a>
+                </div>
+
+            </div>
+        </div>
+            @*<a id="tiles-scroll-prev" class="win-command carousel-control left" href="#metro-carousel" data-slide="prev">
+                <span class="win-commandimage win-commandring">&#xe05d;</span>
+            </a>
+            <a id="tiles-scroll-next"  class="win-command carousel-control right" href="#metro-carousel" data-slide="next">
+                <span class="win-commandimage win-commandring">&#xe059;</span>
+            </a>*@
+@*            </div>
+        </div>
+    </div>*@
+
+@*@section BackButton{
+    @Html.RouteLink(
+        linkText: " ",
+        routeName: "AdminRoute",
+        routeValues: new { controller = "Home", action = "Index" },
+        htmlAttributes: new { id = "backbutton", @class = "win-backbutton" }
+    )
+}*@
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="#myModal">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">添加RSS源</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">添加源(新页面)</span>
+    </a>
+    <a class="win-command" href="@Url.Action("List")">
+        <span class="win-commandimage win-commandring">&#xe11f;</span>
+        <span class="win-label">查看所有源</span>
+    </a>
+    <a class="win-command" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe125;</span>
+        <span class="win-label">刷新页面</span>
+    </a>
+}
+@section RightFooter{
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1cd;</span>
+        <span class="win-label">Previous</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1ca;</span>
+        <span class="win-label">Next</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe202;</span>
+        <span class="win-label">设置</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#x0067;</span>
+        <span class="win-label">搜索</span>
+    </button>
+}

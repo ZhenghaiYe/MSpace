@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="@Url.Content("~/Content/widgets/masonry/jquery.masonry.js")" ></script>
+    <style type="text/css">
+        .item {
+            width: 350px;
+            margin: 5px;
+            padding: 5px;
+            float: left;
+            border: 1px solid #ccc;
+            background: #eee;
+            box-shadow: 0 2px 1px #eee;
+            border-radius:6px;
+        }
+    </style>
+
+    <script type="text/javascript"> 
+        $(function () {
+            
+            var $container = $('#albums');
+
+            $container.imagesLoaded(function () {
+                $container.masonry({
+                    itemSelector: '.item'
+                });
+            });
+        });
+    </script>
+}
+
+<div id="container">
+<fieldset>
+    <legend><h3>相册列表</h3></legend>
+    <div id="albums">
+        @*<div class="item">
+            <img src="@Url.Content("~/Content/holder.png")" class="img-polaroid pull-left" />
+            <div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="@Url.Content("~/Content/holder.png")" class="img-polaroid pull-left" />
+            <div>
+                111111111111111
+            </div>
+        </div>
+        <div class="item">
+            <img src="@Url.Content("~/Content/holder.png")" class="img-polaroid pull-left" />
+            <div>
+                111111111111111
+            </div>
+        </div>*@
+        @foreach (MSpace.Models.Album item in Model)
+        { 
+            <div class="item">
+                <a href="@Url.Action("Album", "Gallary", new { id = item.Id})"><img src="@Url.Content("~/Content/holder.png")" class="img-polaroid pull-left" /></a>
+                <div class="pull-right">
+                    相册名称:&emsp;@Html.TextBox("Name", item.Name, new { @class = "inline" })<br />
+                    相册描述:&emsp;@Html.TextBox("Description", item.Description, new { @class = "inline" })<br />
+                    访问权限:&emsp;@Html.TextBox("Privacy", item.Privacy, new { @class = "inline" })<br />
+                    操&emsp;&emsp;作:&emsp;<input type="submit" value="保存" />&emsp;<input type="submit" value="删除" />
+                </div>
+            </div>
+        }
+    </div>
+</fieldset>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        //$('.page').bind('click', function (e) {
+        //    e.preventDefault();
+        //    loadPage($(this).attr('href'));
+        //});
+    });
+
+    function loadPage(url) {
+        $('#container').load(url);
+    }
+
+</script>
+
+@section LeftFooter{
+    @*<a class="win-command page" href="@Url.Action("Upload")">
+        <span class="win-commandimage win-commandring">&#xe01f;</span>
+        <span class="win-label">上传照片</span>
+    </a>*@
+    <a class="win-command page" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">创建相册</span>
+    </a>
+    <a class="win-command page" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#xe001;</span>
+        <span class="win-label">删除全部</span>
+    </a>
+    @*<a class="win-command" data-toggle="modal" href="@Url.Action("Download")">
+        <span class="win-commandimage win-commandring">&#xe01d;</span>
+        <span class="win-label">下载相册</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe18b;</span>
+        <span class="win-label">随机预览</span>
+    </a>*@
+    @*<a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe19b;</span>
+        <span class="win-label">排列方式</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe017;</span>
+        <span class="win-label">排列方式</span>
+    </a>*@
+}
+   

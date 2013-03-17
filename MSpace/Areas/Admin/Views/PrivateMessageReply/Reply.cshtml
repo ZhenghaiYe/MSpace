@@ -1,0 +1,55 @@
+﻿@model MSpace.Models.PrivateMessageReply
+@{
+    ViewBag.Title = "Reply";
+}
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section1" class="metro-section tile-span-1">
+        
+    </div>
+    <div id="section2" class="metro-section tile-span-6 well">
+        <fieldset>
+            <legend>回复</legend>
+            @using (Html.BeginForm("Reply", "PrivateMessageReply", FormMethod.Post, new { @class="form-horizontal"}))
+            { 
+                <div class="control-group">
+                    <label class="control-label" for="Name">私信作者</label>
+                    <div class="controls">
+                        <input type="text" id="Name" value="@ViewBag.Message.Name" class = "span8" readonly="readonly" />
+                        <span class="help-inline">Please correct the error</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Content">Email</label>
+                    <div class="controls">
+                        <textarea name="Content" readonly="readonly" class = "span8">
+                            @ViewBag.Message.Content
+                        </textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="ReplyContent">Email</label>
+                    <div class="controls">
+                        @Html.TextAreaFor(_ => _.ReplyContent, new { required = "required", rows = 4, @class = "span8" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <button type="submit" class="btn span8">发表回复</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        @*@Html.Hidden("MessageId", @ViewBag.Message.MessageId)*@
+                        @Html.Hidden("MessageId", (@ViewBag.Message as MSpace.Models.PrivateMessage).MessageId)
+                    </div>
+                </div>
+            }
+        </fieldset>
+    </div>
+    
+</div>
+</div>

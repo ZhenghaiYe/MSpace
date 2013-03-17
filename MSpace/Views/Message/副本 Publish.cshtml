@@ -1,0 +1,53 @@
+﻿
+@*<div>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="Name">您的昵称</label>
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    <input type="text" class="input-large" id="Name" name="Name">
+                </div>(必填)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <input id="comment" class="btn btn-primary btn-large span4" type="button" value="评论" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <div id="commentProgress" class="progress progress-striped active hide">
+                    <div class="bar" style="width: 100%;">正在提交</div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>*@
+
+<form>
+    <fieldset>
+        <legend>新留言</legend>
+        <label>昵称</label>
+        <input type="text" placeholder="这里输入您的昵称" required>
+        <span class="help-block">(必填)</span>
+        <label>邮箱</label>
+        <input type="text" placeholder="这里输入您的邮箱">
+        <span class="help-block">(选填，支持Gravatar)</span>
+        <label>内容</label>
+        <textarea placeholder="这里输入您的内容" rows="3" required></textarea>
+        <span class="help-block">(必填)</span>
+        <label class="checkbox">
+            <input type="checkbox"> Check me out
+        </label>
+        <button type="submit" class="btn btn-inverse">发表</button>
+    </fieldset>
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        //art.dialog({ content: '1111' }).time(2500);
+    });
+</script>

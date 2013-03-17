@@ -1,0 +1,97 @@
+﻿@model MSpace.Models.Remind
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section1" class="metro-section tile-span-1">
+        
+    </div>
+    <div id="section2" class="metro-section tile-span-6 well">
+        <fieldset>
+            <legend><h3>新建提醒</h3></legend>
+            @using (Html.BeginForm("Create", "Remind", FormMethod.Post, new { @class="form-horizontal"}))
+            { 
+                <div class="control-group">
+                    <label class="control-label" for="Title">标题</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(_ => _.Title, new { @class="span8" , required="required"})     
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Location">地点</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(_ => _.Location, new { @class="span8", rows = "5" , required="required"})
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="StartDate">开始时间</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(_ => _.StartDate, new { @class = "span8 datepicker", @data_date = DateTime.Now.ToString("yyyy-MM-dd"), data_date_format = "yyyy-mm-dd", value = DateTime.Now.ToString("yyyy-MM-dd"), required = "required", @readonly = "" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="EndDate">结束时间</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(_ => _.EndDate, new { @class = "span8 datepicker", @data_date = DateTime.Now.ToString("yyyy-MM-dd"), data_date_format = "yyyy-mm-dd", value = DateTime.Now.ToString("yyyy-MM-dd"), required = "required", @readonly = "" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Content">提醒描述</label>
+                    <div class="controls">
+                        @Html.TextAreaFor(_ => _.Content, new { @class="span8" , required="required"})
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="CycleId">循环周期</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(_ => _.CycleId, new { @class="span8" , required="required"})
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <button type="submit" class="btn span8">新建提醒</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        @*@Html.Hidden("MessageId", @ViewBag.Message.MessageId)*@
+                    </div>
+                </div>
+            }
+        </fieldset>
+    </div>
+</div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+}
+
+@section LeftFooter{
+    <a class="win-command" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe017;</span>
+        <span class="win-label">查看提醒</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Export")">
+        <span class="win-commandimage win-commandring">&#x0051;</span>
+        <span class="win-label">导出提醒</span>
+    </a>
+}
+@section RightFooter{
+    @*<a class="win-command" data-toggle="modal" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">添加组件</span>
+    </a>*@
+}

@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section1" class="metro-section tile-span-8 well">
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-facebook"></span>
+            </div>
+            <span class="app-label">Facebook</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-twitter"></span>
+            </div>
+            <span class="app-label">Twitter</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-vimeo"></span>
+            </div>
+            <span class="app-label">Vimeo</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-flickr"></span>
+            </div>
+            <span class="app-label">Flickr</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-picassa"></span>
+            </div>
+            <span class="app-label">Picassa</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-github"></span>
+            </div>
+            <span class="app-label">Github</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-deviantart"></span>
+            </div>
+            <span class="app-label">Deviantart</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-yahoo"></span>
+            </div>
+            <span class="app-label">Yahoo</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-skype"></span>
+            </div>
+            <span class="app-label">Skype</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-linkedin"></span>
+            </div>
+            <span class="app-label">Linkedin</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-lastfm"></span>
+            </div>
+            <span class="app-label">Lastfm</span>
+        </a>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-pinterest"></span>
+            </div>
+            <span class="app-label">Pinterest</span>
+        </a>
+    </div>
+
+    <div id="section2" class="metro-section tile-span-2 well">
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl(new { controller = "Link", action = "Index" })">
+            <div class="image-wrapper">
+                <span class="icon icon-pinterest"></span>
+            </div>
+            <span class="app-label">Pinterest</span>
+        </a>
+    </div>
+</div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            
+        });
+    </script>
+}
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="#myModal">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">添加RSS源</span>
+    </a>
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">添加源(新页面)</span>
+    </a>
+    <a class="win-command" href="@Url.Action("List")">
+        <span class="win-commandimage win-commandring">&#xe11f;</span>
+        <span class="win-label">查看所有源</span>
+    </a>
+    <a class="win-command" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe125;</span>
+        <span class="win-label">刷新页面</span>
+    </a>
+}
+@section RightFooter{
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1cd;</span>
+        <span class="win-label">Previous</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1ca;</span>
+        <span class="win-label">Next</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe202;</span>
+        <span class="win-label">设置</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#x0067;</span>
+        <span class="win-label">搜索</span>
+    </button>
+}

@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section1" class="metro-section tile-span-2 well">
+        <fieldset>
+            <legend>布局方式</legend>
+            
+        </fieldset>
+    </div>
+    <div id="section2" class="metro-section tile-span-6 well">
+        <table id="componentList" class="table table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th class="span1 align-center">名称</th>
+                    <th class="span4 align-center">名称</th>
+                    <th class="span2 align-center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            @*<tfoot>脚</tfoot>*@
+        </table>
+        <div id="pro" class="progress progress-indeterminate">
+            <div class="bar"></div>
+        </div>
+        <div style="display:none;" id="previewArea"></div>
+    </div>
+</div>
+</div>
+
+@section Scripts{
+    <script type="text/x-jsrender" id="componentListTemplate">
+        {{for components}}
+            <tr>
+                <td>{{:Name}}</td>
+                <td>{{:Content}}</td>
+                <td>  
+                    <a class="localPreview" href="/Admin/Component/Preview/{{:Id}}">预览</a> |
+                    <a href="/Admin/Component/Edit/{{:Id}}">编辑</a> | 
+                    <a class="localRemove" href="/Admin/Component/Delete/{{:Id}}">删除</a>
+                </td>
+            </tr>
+        {{/for}}
+    </script>
+    <style type="text/css">
+        .meerkat {
+            color: #FFF;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.meerkat.1.3.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jsrender.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            loadComponents();
+
+            $('.localPreview').live('click', function (e) {
+                e.preventDefault();
+                $('#previewArea').load($(this).attr('href'), function () {
+                    $(this).show('slow');
+                });
+            });
+
+            $('.localRemove').live('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr('href'),
+                    type: 'POST',
+                    dataType: 'json',
+                    beforeSend: function (XMLHttpRequest) {
+                        $('#previewArea').hide('fast');
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        if (data.success) {
+                            loadComponents();
+                        }
+                        alert(data.msg);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    },
+                    complete: function (XMLHttpRequest, textStatus) {
+                        XMLHttpRequest = null;
+                    }
+                });
+            });
+
+            $('.meerkat').meerkat({
+                background: 'url(@Url.Content("~/Content/meerkat-top-bg.png")) repeat-x left top',
+                height: '120px',
+                width: '100%',
+                position: 'top',
+                close: '.close-meerkat',
+                dontShowAgain: '.dont-show',
+                animationIn: 'slide',
+                animationSpeed: 500
+            });
+
+        });
+
+
+        function loadComponents() {
+            $.getJSON('@Url.Action("AjaxIndex")', {})
+                .success(function (data) {
+                    $("#componentList tbody").empty();
+                    //JsRender渲染、渲染结果（字符串）插入容器                
+                    $("#componentList tbody").append($("#componentListTemplate").render(data));
+                    $('#pro').hide();
+                })
+                .error(function (textStatus) {
+                    alert("msg:" + textStatus.statusText);
+                })
+                .complete(function (jqXHQ) {
+                    jqXHQ = null;
+                });
+        }
+
+    </script>
+}
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">添加组件</span>
+    </a>
+}
+@section RightFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">添加组件</span>
+    </a>
+}
+
+<div class="meerkat">
+    <a href="#" class="close-meerkat">关闭</a>
+    <a class="dont-show">不再显示</a>	
+    <div class="adsense">		
+        <iframe src ="http://www.qq.com" width="728" align="middle" scrolling="no" height="90" frameborder="0" allowtransparency="true" hspace="0" vspace="0" marginheight="0" marginwidth="0">
+        <p>Your browser does not support iframes.</p>
+        </iframe>
+    </div>
+</div>	
+
+

@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Gallary2";
+}
+
+@section scripts{
+   
+    <link rel="stylesheet" href="@Url.Content("~/Content/widget/iview/iview.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/widget/iview/skin2/style.css")" />
+    <script src="@Url.Content("~/Content/widget/iview/raphael-min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/widget/iview/jquery.easing.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/widget/iview/iview.js")" type="text/javascript"></script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('#navList > li:not(.divider-vertical):eq(3)').addClass('active').siblings().removeClass('active');
+            $('#iview').iView({
+                pauseTime: 7000,
+                pauseOnHover: true,
+                directionNav: true,
+                directionNavHide: false,
+                directionNavHoverOpacity: 0,
+                controlNav: false,
+                nextLabel: "Nächste",
+                previousLabel: "Vorherige",
+                playLabel: "Spielen",
+                pauseLabel: "Pause",
+                timer: "360Bar",
+                timerPadding: 3,
+                timerColor: "#0F0"
+            });
+            $('#iview2').iView({
+                pauseTime: 7000,
+                pauseOnHover: true,
+                directionNav: true,
+                directionNavHide: false,
+                controlNav: true,
+                controlNavNextPrev: false,
+                controlNavTooltip: false,
+                nextLabel: "Próximo",
+                previousLabel: "Anterior",
+                playLabel: "Jugada",
+                pauseLabel: "Pausa",
+                timer: "360Bar",
+                timerBg: "#EEE",
+                timerColor: "#000",
+                timerDiameter: 40,
+                timerPadding: 4,
+                timerStroke: 8,
+                timerPosition: "bottom-right"
+            });
+        });
+    </script>
+}
+
+<h2>Gallary2</h2>
+<div id="iview">
+			<div data-iview:image="@Url.Content("~/Content/photos/photo9.jpg")">
+				<div class="iview-caption caption1" data-x="300" data-y="300" data-transition="expandLeft">EASY TO CONFIGURE AND CUSTOMIZE + COMPLETE WITH A CUSTOM API</div>
+			</div>
+
+			<div data-iview:image="@Url.Content("~/Content/photos/photo8.jpg")">
+				<div class="iview-caption video-caption" data-x="50" data-y="50" data-transition="wipeUp"><iframe src="http://player.vimeo.com/video/11475955?byline=1&amp;portrait=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+				<div class="iview-caption caption4" data-x="600" data-y="140" data-transition="wipeRight">Video</div>
+				<div class="iview-caption caption5" data-x="740" data-y="145" data-transition="wipeLeft">Support</div>
+				<div class="iview-caption caption3" data-x="600" data-y="200" data-width="235" data-height="40" data-transition="wipeLeft">You can easily add <b>Vimeo</b> & <b>Youtube Videos</b> to your <b>Slides</b> & <b>Captions</b></div>
+			</div>
+
+			<div data-iview:image="@Url.Content("~/Content/photos/photo7.jpg")">
+				<div class="iview-caption caption2" data-x="300" data-y="300" data-transition="wipeRight">OPTIONAL AUTO-HIDE CONTROLS + OPTIONAL ROLLOVER SLIDESHOW PAUSE</div>
+			</div>
+
+			<div data-iview:image="@Url.Content("~/Content/photos/photo9.jpg")">
+				<div class="iview-caption" data-x="100" data-y="300" data-transition="wipeLeft">A SMOOTH AND SEXY CROSS-BROWSER SLIDER FOR YOUR IMAGES & VIDEOS</div>
+			</div>
+
+			<div data-iview:image="@Url.Content("~/Content/photos/photo8.jpg")">
+				<div class="iview-caption caption3" data-x="100" data-y="300" data-transition="wipeLeft">FEATURING ANIMATED CAPTIONS WITH MANY TRANSITION EFFECTS</div>
+			</div>
+		</div>
+		<div id="iview2">
+			<div data-iview:image="@Url.Content("~/Content/photos/photo7.jpg")">
+				<div class="iview-caption caption1" data-x="100" data-y="300" data-transition="fade">FINE TUNED, SLEEK & SMOOTH, THIS SLIDER WILL IMPRESS YOUR VISITORS</div>
+			</div>
+
+			<div data-iview:image="@Url.Content("~/Content/photos/photo9.jpg")">
+				<div class="iview-caption caption2" data-x="50" data-y="320" data-transition="wipeRight">SUPPORTS ANIMATED CAPTIONS, VIDEO & IFRAME, SINGLE PAGE MULTI-USE</div>
+			</div>
+
+			<div data-iview:image="@Url.Content("~/Content/photos/photo8.jpg")">
+				<div class="iview-caption caption3" data-x="350" data-y="300" data-transition="wipeLeft">GORGEOUS ANIMATED TIMERS WITH HIGH CUSTOMIZABLE OPTIONS</div>
+			</div>
+
+			<div data-iview:image="@Url.Content("~/Content/photos/photo7.jpg")"></div>
+		</div>

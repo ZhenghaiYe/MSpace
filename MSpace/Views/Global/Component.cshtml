@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Component>
+
+@foreach (var item in Model)
+{   <div class="row-fluid">
+    <div class="well span12">
+        <fieldset>
+            <legend>@item.Name</legend>
+            <div>@Html.Raw(@HttpUtility.HtmlDecode(@item.Content))</div>
+        </fieldset>
+        <hr />
+    </div>
+    </div>
+}

@@ -1,0 +1,206 @@
+﻿@model MSpace.Models.ArticleCategory
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section1" class="metro-section tile-span-2 well">
+        <h2>导航栏</h2>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl("SectionRoute", new { controller = "ArticleCategory", action = "Index", id = 2 })">
+            <div class="image-wrapper">
+                <span class="icon icon-list"></span>
+            </div>
+            <span class="app-label">类别列表</span>
+        </a>
+        <a class="tile app bg-color-gray" href="@Url.RouteUrl("SectionRoute", new { controller = "ArticleCategory", action = "Index", id = 3 })">
+            <div class="image-wrapper">
+                <span class="icon icon-pencil-2"></span>
+            </div>
+            <span class="app-label">
+                新分类
+            </span>
+        </a>
+    </div>
+    @if(ViewBag.SectionId == 2){
+        <div id="section2" class="metro-section tile-span-6 well">
+            <table id="tbCategory" class="table table-hover table-bordered table-striped">
+                <caption>文章类别列表<hr /></caption>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>类别名称</th>
+                        <th>父类编号</th>
+                        <th>别名</th>
+                        <th>链接地址</th>
+                        <th>排序</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="7" style="text-align:center;"><img src="@Url.Content("~/Content/loading.gif")" /></td></tr> 
+                </tbody>
+            </table>    
+        </div> 
+    }
+    @if(ViewBag.SectionId == 3){
+        <div id="section3" class="metro-section tile-span-6 well">
+            @using (Html.BeginForm("add", "articlecategory", FormMethod.Post, new { data_validatable = true, id = "addCategoryForm" }))
+            {
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>添加新类别</legend>
+                    @Html.LabelFor(_ => _.CategoryName)
+                    @Html.EditorFor(_ => _.CategoryName)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.CategoryName)</span>
+                    @Html.LabelFor(_ => _.ParentId)
+                    @Html.DropDownList("ParentId", ViewBag.Categories as SelectList)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.ParentId)</span>
+                    @Html.LabelFor(_ => _.LinkName)
+                    @Html.EditorFor(_ => _.LinkName)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.LinkName)</span>
+                    @Html.LabelFor(_ => _.LinkUrl)
+                    @Html.EditorFor(_ => _.LinkUrl)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.LinkUrl)</span>
+                    @Html.LabelFor(_ => _.SortOrder)
+                    @Html.EditorFor(_ => _.SortOrder)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.SortOrder)</span>
+                    @Html.LabelFor(_ => _.Status)
+                    @Html.EditorFor(_ => _.Status)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.Status)</span>
+                    <button type="submit" id="btnSubmit" class="btn btn-primary">添加</button>
+                </fieldset>
+            }
+        </div> 
+    }
+    @if(ViewBag.SectionId == 4){
+        <div id="section4" class="metro-section tile-span-6 well">
+            @using (Html.BeginForm("add", "articlecategory", FormMethod.Post, new { data_validatable = true, id = "addCategoryForm" }))
+            {
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>修改类别</legend>
+                    @Html.LabelFor(_ => _.Id)
+                    @Html.DisplayFor(_ => _.Id)
+                     <span class="help-block">@Html.ValidationMessageFor(_ => _.Id)</span>
+                    @Html.LabelFor(_ => _.CategoryName)
+                    @Html.EditorFor(_ => _.CategoryName)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.CategoryName)</span>
+                    @Html.LabelFor(_ => _.ParentId)
+                    @Html.DropDownList("ParentId", ViewBag.Categories as SelectList)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.ParentId)</span>
+                    @Html.LabelFor(_ => _.LinkName)
+                    @Html.EditorFor(_ => _.LinkName)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.LinkName)</span>
+                    @Html.LabelFor(_ => _.LinkUrl)
+                    @Html.EditorFor(_ => _.LinkUrl)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.LinkUrl)</span>
+                    @Html.LabelFor(_ => _.SortOrder)
+                    @Html.EditorFor(_ => _.SortOrder)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.SortOrder)</span>
+                    @Html.LabelFor(_ => _.Status)
+                    @Html.EditorFor(_ => _.Status)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.Status)</span>
+                    <button type="submit" id="btnEdit" class="btn btn-primary">添加</button>
+                </fieldset>
+            }
+        </div> 
+    }
+</div>
+</div>
+
+@if(ViewBag.SectionId == 2){
+<script id="articleCategoryTemplate" type="text/x-jquery-tmpl">
+    <tr>
+        <td>
+	        ${Id}
+	    </td>
+	    <td>
+            ${CategoryName}
+	    </td>
+        <td>
+            ${ParentId}
+	    </td>
+        <td>
+            ${LinkName}
+	    </td>
+        <td>
+            ${LinkUrl}
+	    </td>
+        <td>
+            ${SortOrder}
+	    </td>
+	    <td>
+	        <a class="edit btn-link" href="/admin/articlecategory/edit/${Id}" ><span class="icon-pencil"></span> 编辑</a> | <a class="remove btn-link"  data-val="${Id}"><span class="icon-remove"></span> 删除</a>
+	    </td>
+	    <td>
+	        ${SortNumber}
+	    </td>
+	</tr>
+</script>
+
+<script type="text/javascript">
+
+
+    $(function () {
+        LoadArticleCategory();
+        
+        $('#tbCategory tbody a.remove').live('click', function (event) {
+            event.preventDefault();
+            RemoveArticleCategory($(this).attr('data-val'));
+        });
+    });
+
+    function showTip(msg) {
+        art.dialog({
+            title: '信息提示',
+            content: msg,
+            
+        }).time(1500);
+    }
+
+    function RemoveArticleCategory(id) {
+        $.ajax({
+            url: '/admin/articlecategory/remove',
+            data: { id: id },
+            type:'POST',
+            beforeSend: function () {
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                showTip('删除成功');
+                LoadArticleCategory();
+            }
+        });
+    }
+
+    function LoadArticleCategory() {
+        $.ajax({
+            url: '/admin/articlecategory/list',
+            cache:false,
+            beforeSend: function () {
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                $('#tbCategory tbody').empty();
+                $('#articleCategoryTemplate').tmpl(data).appendTo('#tbCategory');
+            }
+        });
+    }
+
+</script>
+}
+
+@if(ViewBag.SectionId == 3){
+    <script type="text/javascript">
+        $(function () {
+            //$('#addCategoryForm').validate();
+            //$('#btnSubmit').click(function (event) {
+            //    $('addCategoryForm').trigger('submit');
+            //});
+        });
+    </script>
+   
+}

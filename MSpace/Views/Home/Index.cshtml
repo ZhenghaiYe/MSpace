@@ -1,0 +1,381 @@
+﻿@{
+    ViewBag.Title = "常伟华的博客平台";
+}
+@section scripts{
+    @*<link rel="stylesheet" media="screen"  href="@Url.Content("~/Content/widgets/flexslider/flexslider.css")"   />
+    <script type="text/javascript" src="@Url.Content("~/Content/widgets/flexslider/jquery.flexslider.js")"></script>*@
+    <script type="text/javascript">
+        $(function () {
+            $('#navList > li:not(.divider-vertical):eq(0)').addClass('active').siblings().removeClass('active');
+        });
+    </script>
+}
+
+@section Login{
+    @if (Convert.ToBoolean(ViewData["LoginStatus"]))
+    { 
+        @Html.Action("Online", "Global");
+    }
+    else 
+    {
+        @Html.Action("Outline", "Global");
+    } 
+}                                                                                                            
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#portlet-demo').portlet({
+            sortable: true,
+            create: function () {
+                //alert('created portlet.');
+            },
+            removeItem: function () {
+                alert('after remove');
+            },
+            columns: [{
+                width: '100%',
+                portlets: [{
+                    attrs: {
+                        id: 'authorInfo'
+                    },
+                    title: function () {
+                        return '<i class="icon-user"></i>&emsp;作者信息';
+                    },
+                    icon: '',
+                    content: {
+                        //设置区域内容属性
+                        style: {
+                            textAlign:'center'
+                        },
+                        type: 'text',
+                        text: '<div id="qrcode1"></div>',
+                        beforeShow: function (c) {
+
+                        },
+                        afterShow: function () {
+                            decorateQRCode();
+                        }
+                    }
+                    //scripts: ['loaded-by-portlet.js']
+                }, {
+                    attrs: {
+                        id: 'announcement'
+                    },
+                    title: function () {
+                        return '<i class="icon-bullhorn"></i>&emsp;网站公告';
+                    },
+                    icon: '',
+                    content: {
+                        //设置区域内容属性
+                        style: {
+                            textAlign: 'center'
+                        },
+                        type: 'text',
+                        text: '本站晚上六点之后，开启<a href="http://monobook.vicp.cc:8008/">http://monobook.vicp.cc:8008/</>域名进行测试',
+                        beforeShow: function (c) {
+
+                        },
+                        afterShow: function () {
+                            
+                        }
+                    }
+                }, {
+                    attrs: {
+                        id: 'urlInfo'
+                    },
+                    title: function () {
+                        return '<i class="icon-globe"></i>&emsp;网页信息';
+                    },
+                    icon: '',
+                    content: {
+                        //设置区域内容属性
+                        style: {
+                            textAlign: 'center'
+                        },
+                        type: 'text',
+                        text: '<div id="qrcode2"></div>',
+                        beforeShow: function (c) {
+
+                        },
+                        afterShow: function () {
+                            $('#qrcode2').MyQRCode({
+                                encoding: "UTF-8",                                content: window.location,                                size: "150x150"
+                            });
+                            decorateQRCode();
+                        }
+                    }
+                }, {
+                    attrs: {
+                        id: 'urlInfo'
+                    },
+                    title: function () {
+                        return '友链';
+                    },
+                    icon: 'ui-icon-link',
+                    content: {
+                        //设置区域内容属性
+                        style: {
+                            
+                        },
+                        type: 'text',
+                        text: function () {
+                            return '<div style="margin-left:15px;"><ol><li><a href="http://github.com/changweihua" target="_blank" >Github 我的代码库 </a></li><li><a href="http://github.com/cmono" target="_blank" >Github 我的代码库(Fork别人的) </a></li><li><a href="http://www.cnblogs.com/changweihua" target="_blank" >CNBLOG 我的博客园 </a></li><li><a href="http://www.cnblogs.com/changweihua" target="_blank" >CSDN(需要下载的可以联系我)</a></li></ul></div>';
+                            //return $('#friendLink').css({display:''}).html();
+                        },
+                        beforeShow: function (c) {
+
+                        },
+                        afterShow: function () {
+                            
+                        }
+                    }
+                }]
+            }]
+        });
+
+        $('.ui-portlet-header').addClass('active');
+
+        
+        $('#qrcode1').qrcode({
+            text: "Changweihua www.cmono.net changweihua@cmono.net changweihua@outlook.com",
+            width: "150",
+            height: "150"
+        });
+
+        
+        
+
+    });
+
+    function decorateQRCode() {
+        $('div[id^=qrcode] img').addClass('img-polaroid img-circle');
+    }
+
+</script>
+                                                                                                                                             
+@section LeftBanner{
+
+    <div class="row-fluid">
+       <div id="portlet-demo" class="span12"></div> 
+    </div>
+    <div class="row-fluid">
+       @Html.Action("Component", "Global")
+    </div>
+    <div class="row-fluid nav-collapse">
+        <div class="accordion" id="accordion2">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#calendar">
+                        <i class="icon-calendar"></i> 编程日历
+                    </a>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                        最新动态
+                    </a>
+                </div>
+                <div id="collapseTwo" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        目前，中国半数5A级景区门票达到100元，黄山门票10年来由80元涨至230元。山东曲阜称，与同类景区相比收费较低，仅收150元，不涨票价就丢身价。曲阜的孔庙、孔府和孔林，年收入1.5亿元左右，全部上缴了地方财政，但景区维护成本从未公开。
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                        超生罚款
+                    </a>
+                </div>
+                <div id="collapseThree" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        学者杨支柱因生二胎被取消公职，并罚款24万余元。他称，计生罚款以前直接叫超生罚款，入世后改成“社会抚养费”。根据9省市超生罚款的平均数，全国31个省市每年征收的超生罚款可高达279亿元。其中大城市将该收入上缴财政，而地方则分配混乱，部分罚款去向成谜。
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="row-fluid">
+        <ul class="nav nav-pills nav-stacked">
+            <li>
+            <a href="#">首页</a>
+            </li>
+            <li><a href="#">...</a></li>
+            <li><a href="#">...</a></li>
+        </ul>
+    </div>
+
+}
+
+@section BreadCrumb{
+    <div class="span12">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">首页</a>
+            </li>
+        </ul>
+    </div>
+}
+
+
+<div class="row-fluid">
+    @Html.Action("BlogRoll", "Global")
+</div>
+
+<div class="row-fluid">
+<div class="alert alert-info alert-block span6">
+    <a class="close"><i class="icon-refresh"></i></a>
+    <h4 class="alert-heading"><i class="icon-random"></i> 随机日志</h4>
+    <hr />
+    <div class="span12 alert-body">
+        <ul id="articleList" class="unstyled">
+
+        </ul>
+    </div>
+</div>
+
+<div class="alert alert-info alert-block span6">
+    <a class="close"><i class="icon-refresh"></i></a>
+    <h4 class="alert-heading"><i class="icon-bullhorn"></i> 最新动态</h4>
+    <hr />
+    <div class="span12 alert-body">
+        <ul id="newsList" class="unstyled">
+
+        </ul>
+    </div>
+</div>
+
+</div>
+
+<div class="row-fluid">
+<div class="alert alert-info alert-block span6">
+    <a class="close"><i class="icon-eye-open"></i></a>
+    <h4 class="alert-heading"><i class="icon-tasks"></i> 当前任务</h4>
+    <hr />
+    <div class="span12 alert-body">
+        为了更好的融合移动平台，使用Kendoui进行开发准备中 。添加谷歌地图，初步实现LBS
+    </div>
+</div>
+
+<div class="alert alert-info alert-block span6">
+    <a class="close"><i class="icon-refresh"></i></a>
+    <h4 class="alert-heading"><i class="icon-user"></i> 个人简介</h4>
+    <hr />
+    <div class="span12 alert-body">
+        
+    </div>
+</div>
+
+</div>
+
+<div class="row-fluid">
+<div class="alert alert-info alert-block span6">
+    <a class="close"><i class="icon-minus"></i></a>
+    <h4 class="alert-heading"><i class="icon-random"></i> 随机日志</h4>
+    <hr />
+    <div class="span12 alert-body">
+        
+    </div>
+</div>
+
+<div class="alert alert-info alert-block span6">
+    <a class="close"><i class="icon-minus"></i></a>
+    <h4 class="alert-heading"><i class="icon-user"></i> 个人简介</h4>
+    <hr />
+    <div class="span12 alert-body">
+        
+    </div>
+</div>
+
+</div>
+
+<div class="row-fluid">
+<div class="alert alert-info alert-block span6">
+    <a class="close"><i class="icon-minus"></i></a>
+    <h4 class="alert-heading"><i class="icon-random"></i> 随机日志</h4>
+    <hr />
+    <div class="span12 alert-body">
+        
+    </div>
+</div>
+
+<div class="alert alert-info alert-block span6">
+    <a class="close"><i class="icon-minus"></i></a>
+    <h4 class="alert-heading"><i class="icon-user"></i> 个人简介</h4>
+    <hr />
+    <div class="span12 alert-body">
+        
+    </div>
+</div>
+
+</div>
+
+<div class="row-fluid">
+<div class="alert alert-success alert-block span12">
+    <h4 class="alert-heading"><i class="icon-link"></i> 友情链接</h4>
+    <hr />
+    <div class="span12 alert-body">
+        
+    </div>
+</div>
+</div>
+
+
+<script src="@Url.Content("~/Scripts/jQuery.tmpl.js")" type="text/javascript"></script>
+<script id="twitterTemplate" type="text/x-jquery-tmpl">
+    <li><em>${Content}</em> -- ${PubDate}</li>
+</script>
+<script id="articleTemplate" type="text/x-jquery-tmpl">
+    <li><em>${Title}</em>--${PubDate}</li>
+</script>
+<script id="newsTemplate" type="text/x-jquery-tmpl">
+    <li>${PublishDate} ==>> <em>${Content}</em></li>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#calendar').datepicker({
+            showWeek: true,
+            showButtonPanel: true,
+            onSelect: function (date) {
+                //选中日期，跳转到改天所写日志页面
+                alert(date);
+            }
+        });
+
+        //$('#twitterDiv').load('@Url.Action("Twitter", "Global")');
+        LoadData('twitterTemplate', 'twitterList', '@Url.Action("Twitter", "Global")');
+        LoadData('articleTemplate', 'articleList', '@Url.Action("Article", "Global")');
+        LoadData('newsTemplate', 'newsList', '@Url.Action("LatestNews", "Global")');
+
+        //$('div.alert-block').hover(function () {
+        //    $(this).transition({ perspective: 100, rotateX: 30 });
+        //}, function () {
+        //    $(this).transition({ perspective: 0, rotateX: 0 });
+        //});
+
+    });
+
+    function LoadData(template, target, url) {
+        $.ajax({
+            url: url,
+            cache: false,
+            beforeSend: function () {
+                
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                $('#' + template + '').tmpl(data).appendTo('#' + target + '');
+            }
+        });
+    }
+
+
+</script>

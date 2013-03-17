@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        
+    </script>
+}
+
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section1" class="metro-section tile-span-2 well">
+        <h2>导航栏</h2>
+        <a class="tile app bg-color-blue" href="@Url.Action("Index")">
+            <div class="image-wrapper">
+                <span class="icon icon-list"></span>
+            </div>
+            <span class="app-label">碎语列表</span>
+        </a>
+        <a class="tile app bg-color-gray" href="@Url.Action("Write")">
+            <div class="image-wrapper">
+                <span class="icon icon-pencil-2"></span>
+            </div>
+            <span class="app-label">发表新碎语</span>
+        </a>
+    </div>
+    <div id="section2" class="metro-section tile-span-6 well">
+       @* <div class="media">
+            <a class="pull-left" href="#">
+                <span class="icon icon-happy"></span>
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">Media heading</h4>
+                    ...
+            </div>
+        </div>
+        <div class="media">
+            <a class="pull-left" href="#">
+               <img class="media-object" src="http://placehold.it/64x64">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">Media heading</h4>
+                    ...
+            </div>
+        </div>*@
+        <div class="progress progress-indeterminate">
+            <div class="bar"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script id="TwitterTemplate" type="text/x-jquery-tmpl">
+    <div class="media">
+        <a class="pull-left" href="#">
+            <span class="icon icon-happy"></span>
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">发表于:${PublishDate},作者:${Author}</h4>
+            ${Content}
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        LoadTwitters();
+    });
+
+    function LoadTwitters() {
+        $.ajax({
+            url: '/admin/twitter/list',
+            dataType: 'json',
+            cache: false,
+            beforeSend: function () {
+            },
+            error: function () {
+            },
+            success: function (data) {
+                $('#section2').empty();
+                $('#TwitterTemplate').tmpl(data).appendTo('#section2');
+            }
+        });
+    }
+
+</script>
+
+
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Write")">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">添加碎语</span>
+    </a>
+}
+@section RightFooter{
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1cd;</span>
+        <span class="win-label">Previous</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1ca;</span>
+        <span class="win-label">Next</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe202;</span>
+        <span class="win-label">设置</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#x0067;</span>
+        <span class="win-label">搜索</span>
+    </button>
+}

@@ -1,0 +1,84 @@
+﻿@model MSpace.Models.RssSource
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section5" class="metro-section tile-span-1 well">
+        <h2>导航区域</h2>
+        
+    </div>
+    <div id="section6" class="metro-section tile-span-6 well">
+        @using (Html.BeginForm()) {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>RssSource</legend>
+
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SourceName)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SourceName)
+                    @Html.ValidationMessageFor(model => model.SourceName)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SourceUrl)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SourceUrl)
+                    @Html.ValidationMessageFor(model => model.SourceUrl)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SourceDescription)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.SourceDescription)
+                    @Html.ValidationMessageFor(model => model.SourceDescription)
+                </div>
+
+                <p>
+                    <input type="submit" value="Save" />
+                </p>
+            </fieldset>
+        }
+    </div>
+}
+
+</div>
+</div>
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">添加源(新页面)</span>
+    </a>
+    <a class="win-command" href="@Url.Action("List")">
+        <span class="win-commandimage win-commandring">&#xe11f;</span>
+        <span class="win-label">查看所有源</span>
+    </a>
+}
+@section RightFooter{
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1cd;</span>
+        <span class="win-label">Previous</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1ca;</span>
+        <span class="win-label">Next</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe202;</span>
+        <span class="win-label">设置</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#x0067;</span>
+        <span class="win-label">搜索</span>
+    </button>
+}
+

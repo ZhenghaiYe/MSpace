@@ -1,0 +1,58 @@
+﻿@model MSpace.Models.ArticleCategory
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="metro span12">
+<div class="metro-sections">
+    <div id="section1" class="metro-section tile-span-2 well">
+        <h2>导航栏</h2>
+        <a class="tile app bg-color-blue" href="@Url.RouteUrl("SectionRoute", new { controller = "ArticleCategory", action = "Index", id = 2 })">
+            <div class="image-wrapper">
+                <span class="icon icon-list"></span>
+            </div>
+            <span class="app-label">类别列表</span>
+        </a>
+        <a class="tile app bg-color-gray" href="@Url.RouteUrl("SectionRoute", new { controller = "ArticleCategory", action = "Index", id = 3 })">
+            <div class="image-wrapper">
+                <span class="icon icon-pencil-2"></span>
+            </div>
+            <span class="app-label">
+                新分类
+            </span>
+        </a>
+    </div>
+    
+        <div id="section4" class="metro-section tile-span-6 well">
+            @using (Html.BeginForm("edit", "articlecategory", FormMethod.Post, new { data_validatable = true, id = "addCategoryForm" }))
+            {
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>修改类别</legend>
+                    @Html.LabelFor(_ => _.Id)
+                    @Html.DisplayFor(_ => _.Id)
+                     <span class="help-block">@Html.ValidationMessageFor(_ => _.Id)</span>
+                    @Html.LabelFor(_ => _.CategoryName)
+                    @Html.EditorFor(_ => _.CategoryName)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.CategoryName)</span>
+                    @Html.LabelFor(_ => _.ParentId)
+                    @Html.DropDownList("ParentId", ViewBag.Categories as SelectList)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.ParentId)</span>
+                    @Html.LabelFor(_ => _.LinkName)
+                    @Html.EditorFor(_ => _.LinkName)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.LinkName)</span>
+                    @Html.LabelFor(_ => _.LinkUrl)
+                    @Html.EditorFor(_ => _.LinkUrl)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.LinkUrl)</span>
+                    @Html.LabelFor(_ => _.SortOrder)
+                    @Html.EditorFor(_ => _.SortOrder)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.SortOrder)</span>
+                    @Html.LabelFor(_ => _.Status)
+                    @Html.EditorFor(_ => _.Status)
+                    <span class="help-block">@Html.ValidationMessageFor(_ => _.Status)</span>
+                    <button type="submit" id="btnEdit" class="btn btn-primary">保存修改</button>
+                </fieldset>
+            }
+        </div> 
+</div>
+</div>

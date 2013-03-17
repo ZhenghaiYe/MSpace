@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "WaterFall";
+    Layout = "~/Views/Shared/BlankTemplate.cshtml";
+}
+
+@section Scripts{
+    <link rel="stylesheet" href="@Url.Content("~/Content/kissy/css/dpl/base.css")"/>
+    <script type="text/javascript" src="@Url.Content("~/Content/kissy/seed.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/kissy/base.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/kissy/water.js")"></script>
+
+    <style>
+        .ks-waterfall {
+            position: absolute;
+            width: 192px;
+            overflow: hidden;
+            padding: 15px;
+            border: 2px solid #ddd;
+            margin-bottom: 20px;
+            text-align: center;
+            left:-9999px;
+            top:-9999px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        KISSY.ready(function (S) {
+            var DOM = S.DOM, Event = S.Event;
+            KISSY.use("waterfall", function (S, Waterfall) {
+                new Waterfall({
+                    container: "#container",    //节点容器
+                    minColCount: 2,             //最小列数
+                    colWidth: 235,              //每列的宽度
+                    adjustEffect: {
+                        easing: 'none', // easing type
+                        duration: 0.5 // 调整动画时间
+                    }
+                });
+            });
+
+        });
+               
+    </script>
+
+    <script type="tpl" id="tpl">
+      <div class="pin ks-waterfall" data-id="">
+        <a href="#" class="image">
+          <img height="{{height}}" alt="" src="{{photopath}}"/>
+        </a>
+        <p class="description"></p>
+        <p>
+          <button class="del">删除</button>
+          <button class="grow">增高</button>
+        </p>
+      </div>
+    </script>
+
+}
+
+<div id="wrapper">
+    <div id="button_container"></div>
+
+    <div id="article">
+        <div id="ColumnContainer"></div>
+        <a id="BackToTop" href="#">Scroll to Top</a>
+        <div id="loadingPins"><img src="http://d3io1k5o0zdpqr.cloudfront.net/images/BouncingLoader.gif" alt="Pin Loader Image"/><span>Fetching pins&hellip;</span></div>
+    </div>
+</div>
+<script type="tpl" id="tpl">
+    <div class="pin ks-waterfall" data-id="{id}">
+        <a href="#" class="image">
+            <img height="{height}" alt="{title}" src="http://farm{farm}.static.flickr.com/{server}/{id}_{secret}_m.jpg"/>
+        </a>
+        <p class="description">{title}</p>
+        <p>
+            <button class="del">删除</button>
+            <button class="grow">增高</button>
+        </p>
+    </div>
+</script>
+<script src="demo.js"></script>

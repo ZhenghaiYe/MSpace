@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@section Scripts{
+    <link href="@Url.Content("~/Content/widgets/flexigrid/css/flexigrid.css")" rel="stylesheet" type="text/css" /> 
+    <script type="text/javascript" src="@Url.Content("~/Content/widgets/flexigrid/js/flexigrid.js")"></script>    
+}
+
+<script type="text/x-jsrender" id="siteNewsTemplate">
+    {{for news}}
+        <tr>
+            <td>{{:Id}}</td>
+            <td>{{:Title}}</td>
+            <td>{{:Content}}</td>
+            <td>{{:PublishDate}}</td>
+            <td><a data-val="{{:Id}}" href="@Url.Action("Delete")"><i class="icon-remove"></i></a></td>
+        </tr>
+    {{/for}}
+</script>
+
+<div class="metro span12">
+    <div class="metro-sections">
+        <div id="section1" class="metro-section tile-span-6 well">
+            <table id="tbNews" class="table table-hover table-bordered table-striped">
+                <caption><strong>文章列表</strong><hr /></caption>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>新闻标题</th>
+                        <th>新闻内容</th>
+                        <th>发布日期</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" style="text-align:center;">
+                        <div id="loading" class="progress progress-indeterminate">
+                            <div style="margin:0px auto;" class="win-ring small"></div>
+                        </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div id="section2" class="metro-section tile-span-6 well">
+            <div id="siteNews"></div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal warning bg-color-blu hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-body">
+        <p></p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-large" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#siteNews").flexigrid({
+            url: "@Url.Action("FlexiGrid")?" + Date().toLocaleString(),
+            dataType: "json",
+            height: "auto",
+            usepager: true,
+            nowrap: false,
+            minwidth: 160,
+            title: "网站新闻汇",
+            showtogglebtn: true,
+            userp: true,
+            rp: 20,
+            idProperty: 'Id',
+            pagetext: '当前页数',
+            findtext:'查找',
+            sortder: "asc",
+            sortname: "Id",
+            method:'GET',
+            pagestat: '显示记录从{from}到{to}，总数 {total} 条',
+            nomsg: '没有符合条件的记录存在',
+            errormsg: '运行错误',
+            hideOnSubmit: true,
+            showTableToggleBtn: true,
+            colModel: [
+                { display: '新闻编号', name: 'Id', sortable: true, align: 'center' },
+                { display: '新闻标题', name: 'Title', sortable: true, align: 'center' },
+                { display: '新闻内容', name: 'Content', sortable: true, align: 'center' },
+                { display: '发布日期', name: 'PublishDate', sortable: true, align: 'center' }
+            ],
+            //buttons: [
+            //    { name: 'Add', bclass: 'add', onpress: undefined },
+            //    { name: 'Delete', bclass: 'delete', onpress: undefined },
+            //    { separator: true }
+            //],
+            searchitems: [
+                { display: '新闻标题', name: 'Title' },
+                { display: '新闻内容', name: 'Content', isdefault: true }
+            ]
+        });
+
+        loadNews();
+
+        $("#tbNews tbody").delegate('a', 'click', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '@Url.Action("Delete")',
+                cache: false,
+                data: {id:$(this).attr('data-val')},
+                dataType: 'json',
+                beforeSend: function () {
+                },
+                success: function (data) {
+                    $("this").parent().parent().remove();
+                    $('#myModal').children('div.modal-body').html('<p style="text-align:center;" class="lead">' + data.msg + '</p>');
+                    $('#myModal').modal('show');
+                    loadNews();
+                }
+            });
+        });
+
+        function loadNews() {
+            $.ajax({
+                url: '@Url.Action("List")',
+                cache: false,
+                dataType: 'json',
+                beforeSend: function () {
+                    $('#loading').show('fast');
+                },
+                success: function (data) {
+                    $("#tbNews tbody").empty();
+                    var html = $("#siteNewsTemplate").render(data);
+                    //Insert into Container
+                    $("#tbNews tbody").append(html);
+                    $('#loading').hide('slow');
+                }
+            });
+        }
+
+    });
+</script>
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#x0025;</span>
+        <span class="win-label">添加新闻</span>
+    </a>
+
+    <a class="win-command" data-toggle="modal" href="#myModal3">
+        <span class="win-commandimage win-commandring">&#xe126;</span>
+        <span class="win-label">错误提示</span>
+    </a>
+
+}
+
+@section RightFooter{
+    @*<a class="win-command" data-toggle="modal" href="@Url.Action("Index")">
+        <span class="win-commandimage win-commandring">&#xe017;</span>
+        <span class="win-label">新闻列表</span>
+    </a>*@
+}

@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "RSS";
+}
+@section scripts{
+    <link rel="stylesheet" href="@Url.Content("~/Content/templates/bootstrap/plugins/datepicker/css/datepicker.css")" />
+    <script src="@Url.Content("~/Content/templates/bootstrap/plugins/datepicker/js/bootstrap-datepicker.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#navList > li:not(.divider-vertical):eq(2)').addClass('active').siblings().removeClass('active');
+        });
+
+    </script>
+}
+
+@section LeftBanner{
+    <div class="row-fluid">
+	<div class="well sidebar-nav">
+		<ul class="nav nav-list">
+			<li class="nav-header">系统信息</li>
+			<li class="active"><a href="#gallary">系统展示</a></li>
+			<li><a href="#">作者信息</a></li>
+			<li class="nav-header">最新日志</li>
+			<li><a href="log.php?id=1b1b72af-888b-48fe-bdb2-11d09239df1e">升级到VS2012后遇到的两个问题</a></li>
+            <li><a href="log.php?id=833c2acb-609d-42f9-978c-d4983054ea6a">adobe</a></li>
+            <li><a href="log.php?id=f4bfa338-4708-442d-8cc0-5ecb086cc24a">戒指的戴法</a></li>
+            <li><a href="log.php?id=a1cf1884-7c02-470e-80af-dbab660f2e01">一个男人关心的东西 决定了他的层次</a></li>
+            <li><a href="log.php?id=210ba60d-8a2f-473d-8e07-29ab494cbc62">多线程加载进度条实例 </a></li>
+            <li><a href="log.php?id=23d1e38e-70ab-48a8-a3f9-2d4b05cfbe58">程序员为啥就“死的早”呢？</a></li>
+            <li><a href="log.php?id=ab89ec25-4589-4f9b-91dc-6ec91395a6f0">人大常委会关于加强网络信息保护决定草案(全文)</a></li>
+		</ul>
+	</div><!--/.well -->
+    </div>
+}
+
+@section BreadCrumb{
+    <div class="span12">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">RSS</a>
+            </li>
+        </ul>
+    </div>
+}
+
+<div class="row-fluid">
+    <h2>RSS</h2>
+</div>

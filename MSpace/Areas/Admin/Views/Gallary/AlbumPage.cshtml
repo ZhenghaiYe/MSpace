@@ -1,0 +1,5 @@
+﻿
+@foreach (MSpace.Models.AlbumImage item in Model)
+{
+    <div class="item"><img src="@item.Url"/><hr /><span class="box_hover">@item.OriginName</span></div>
+}

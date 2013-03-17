@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Scripts{
+    <style type="text/css">
+        .portraint
+        {
+            width: 35px;
+            height: 35px;
+            vertical-align:middle;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $('.checkbox img').live('click', function (event) {
+                event.preventDefault();
+            });
+        });
+    </script>
+}
+
+
+<div class="span3">
+    <div class="dropdown">
+        <a class="header-dropdown dropdown-toggle accent-color" data-toggle="dropdown" href="#" > 全部<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a href="./hub.html">全部</a></li>
+            <li><a href="./index.html">有空</a></li>
+            <li><a href="./index.html">组一</a></li>
+            <li><a href="./index.html">组二</a></li>
+        </ul>
+    </div>
+    
+    <div style="overflow-y:scroll;height:450px;width:auto;">
+        <div class="input-append">
+            <input type="text" data-provide="typeahead">
+            <span class="add-on"><i class="icon icon-search-2"></i></span>
+        </div>
+        <label class="checkbox">
+            <input type="checkbox" value="">
+            <span class="metro-checkbox">
+                <img class="img-circle portraint" src="@Url.Content("~/Content/Images/default.jpg")" />
+                ss
+            </span>
+        </label>
+        @{Html.RenderAction("ListSummary");}
+    </div>
+    <div class="span8 offset1">
+           fsdfs
+    </div>
+
+</div>
+
+@*<div class="metro-sections">
+    
+    <div id="section1" class="metro-section tile-span-2">
+        <div class="tile wide text">
+            <div class="text-header"><input type="text /> </div>
+        </div>
+        <div class="tile widepeek">
+            <div class="tile-image-wrapper">
+                <img src="content/img/tile-wide.jpg" alt=""/>
+            </div>
+            <div class="text">Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</div>
+        </div>    </div>
+    <div id="section2" class="metro-section tile-span-4">
+        <h2>文章管理</h2>
+    </div>
+</div>*@
+
+@section LeftFooter{
+    <a class="win-command" data-toggle="modal" href="@Url.Action("Create")">
+        <span class="win-commandimage win-commandring">&#xe03e;</span>
+        <span class="win-label">新建</span>
+    </a>
+}
+@section RightFooter{
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1cd;</span>
+        <span class="win-label">Previous</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#xe1ca;</span>
+        <span class="win-label">Next</span>
+    </button>
+    <button class="win-command">
+        <span class="win-commandimage win-commandring">&#x0067;</span>
+        <span class="win-label">搜索</span>
+    </button>
+}

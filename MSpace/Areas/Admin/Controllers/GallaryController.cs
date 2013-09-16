@@ -102,6 +102,14 @@ namespace MSpace.Areas.Admin.Controllers
         //    return null;
         //}
 
+
+
+        public ActionResult UploadSingle(int id, HttpPostedFileBase Filedata)
+        {
+            var model = albumRepository.Find(id);
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Upload(int id, HttpPostedFileBase Filedata)
         {

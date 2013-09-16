@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" type="image/x-icon" href="@Url.Content("~/Content/favicon.ico")" />
+		<style type="text/css">
+			body {
+				padding-top: 70px;
+				padding-bottom: 40px;
+			}
+			form {
+				margin: 0;
+			}
+			textarea {
+				display: block;
+			}
+			
+			#toTop{width:67px;height:114px;background:url('@Url.Content("~/Content/toTop.gif")');position:fixed;bottom:55px;left:25px;display:none;}
+		</style>
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link href="@Url.Content("~/Content/templates/bootstrap/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/templates/jquerybootstrap/css/jquery-ui-1.10.0.custom.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/templates/bootstrap/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+	<!--[if lte IE 6]>
+		<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/templates/bootstrap/css/bootstrap-ie6.css")">
+	<![endif]-->
+	<!--[if lte IE 7]>
+		<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/templates/bootstrap/css/ie.css")">
+		<link href="@Url.Content("~/Content/templates/bootstrap/css/font-awesome-ie7.min.css")" rel="stylesheet" type="text/css" />
+	<![endif]-->
+	@*<link href="@Url.Content("~/Content/templates/bootstrap/css/cus-icons.css")" rel="stylesheet" type="text/css" />*@
+
+	<link href="@Url.Content("~/Content/templates/bootstrap/css/bootstrap-responsive.min.css")" rel="stylesheet" type="text/css" />
+
+	@*<link href="@Url.Content("~/Content/templates/bootstrap/fuelux/css/fuelux.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/templates/bootstrap/fuelux/css/fuelux-responsive.min.css")" rel="stylesheet" type="text/css" />*@
+
+	<link rel="stylesheet" href="@Url.Content("~/Content/templates/bootstrap/plugins/modalDialog/css/animate.css")" type="text/css" />
+
+	<script src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.transit.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>         
+	<script src="@Url.Content("~/Content/templates/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/jquery-ui-1.10.0.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Content/templates/bootstrap/plugins/modalDialog/js/bootstrap-modalmanager.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Content/widget/glow/jquery.color.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Content/widget/glow/jquery-glowing.js")" type="text/javascript"></script>
+	@*<script src="@Url.Content("~/Content/templates/bootstrap/fuelux/all.min.js")" type="text/javascript"></script>*@
+	
+	@*<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />*@
+	<!--[if gte IE 7]><!-->
+	   @* <link href="@Url.Content("~/Content/widgets/artDialog/skins/idialog.css")" rel="stylesheet" type="text/css" />*@
+		<link href="@Url.Content("~/Content/widgets/artDialog/skins/twitter.css")" rel="stylesheet" type="text/css" />
+	<!--<![endif]-->
+	<!--[if lt IE 7]>
+	   <link href="@Url.Content("~/Content/widgets/artDialog/skins/default.css")" rel="stylesheet" type="text/css" />
+	<![endif]-->
+	
+	<script src="@Url.Content("~/Content/widgets/artDialog/artDialog.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Content/widgets/artDialog/artDialog.plugins.min.js")" type="text/javascript"></script>
+
+    <link href="@Url.Content("~/Content/widgets/portlet/css/jquery.portlet.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Content/widgets/portlet/script/jquery.portlet.js")" type="text/javascript"></script>  
+    <script src="@Url.Content("~/Content/widgets/portlet/script/jquery.portlet.pack.js?v=1.1.3")" type="text/javascript"></script> 
+    <script src="@Url.Content("~/Content/widgets/qrcode/jquery.qrcode.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Content/widgets/qrcode/qrcode.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.MyQRCode.js")" type="text/javascript"></script>
+
+	@RenderSection("scripts", false)
+
+	<script type="text/javascript">
+		$(function () {
+			$('.blue').addGlow({ textColor: '#00f', haloColor: '#00f', radius: 100 });
+			$('.green').addGlow({ textColor: '#0f0', haloColor: '#0f0', radius: 100 });
+			$('*').bind('glow:started', console.info);
+			$('*').bind('glow:canceled', console.info);
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 100) {
+					$('#toTop').fadeIn();
+				} else {
+					$('#toTop').fadeOut();
+				}
+			});
+			$("#toTop").click(function () {
+				$("html,body").animate({ scrollTop: 0 }, "slow");
+				return false;
+			});
+
+			// Autocomplete
+			var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
+
+			$("#searchKey").autocomplete({
+				source: availableTags
+			});
+		});
+	</script>
+
+	<style type="text/css" media="screen">
+		a.glowing {
+			color: #0af;
+		}
+  </style>
+
+</head>
+
+<body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand blue" href="http://www.cmono.net/monobook/">常伟华的博客</a>
+					<div class="nav-collapse">
+						<ul id="navList" class="nav nav-pills">
+							<li><a class="blue" href="@Url.RouteUrl("DefaultRoute", new { controller="Home", action="Index" })"><i class="icon-home"></i> 首页</a></li>
+							<li><a class="blue" href="@Url.RouteUrl("DefaultRoute", new { controller="Home", action="About" })"><i class="icon-file"></i> 关于</a></li>
+							<li><a class="blue" href="@Url.RouteUrl("DefaultRoute", new { controller="Article", action="Index" })"><i class="icon-list"></i> 文章</a></li>
+							<li><a class="blue" href="@Url.RouteUrl("DefaultRoute", new { controller="Gallary", action="Index" })"><i class="icon-picture"></i> 相册</a></li>
+							<li class="divider-vertical"></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-external-link"></i> 友链<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li class="nav-header">国内</li>
+									<li><a href="http://www.cnblogs.com/changweihua/">我的博客园</a></li>
+									<li><a href="http://blog.csdn.net/cqwl200913014060/">我的CSDN</a></li>
+									<li><a href="http://changvh.blog.51cto.com">我的51CTO</a></li>
+									<li class="divider"></li>
+									<li class="nav-header">国外</li>
+									<li><a href="https://github.com/changweihua/"><i class="icon-github"></i> Github</a></li>
+									<li><a href="#"><i class="icon-twitter"></i> Twitter</a></li>
+									<li><a href="#"><i class="icon-facebook"></i> Facebook</a></li>
+									<li><a href="#"><i class="icon-linkedin"></i> LinkedIn</a></li>
+									<li><a href="#"><i class="icon-google-plus"></i> Google Plus</a></li>
+								</ul>
+							</li>
+							<li class="divider-vertical"></li>
+                            <li><a data-val="@Url.Action("Publish", "Message")" href="@Url.Action("Index", "Message")">留言板</a></li>						
+                            <li class="divider-vertical"></li>
+						</ul>
+						<form class="navbar-search" action="">
+						   @* <div class="input-append">
+								<input type="text" class="search-query span2" placeholder="搜索" />
+								<span class="add-on"><i class="icon-search"></i></span>
+								<input type="submit" class="btn" value="Search" />
+							</div>*@
+							@*<div class="input-prepend input-append">
+								<span class="add-on"><i class="icon-picture"></i></span>
+								<input class="search-query span2" placeholder="搜索" type="text" id="" name="">
+								<input class="btn" type="submit" value="搜索" />
+							</div>*@
+							<div class="input-append search">
+								<input class="input-medium" placeholder="关键字" type="text" id="searchKey" name="">
+								<button type="submit" class="btn"><i class="icon-search"></i></button>
+							</div>
+						</form>
+						@RenderSection("Login", false)
+                        
+					</div><!-- /.nav-collapse -->
+				</div>
+			</div><!-- /navbar-inner -->
+		</div><!-- /navbar -->
+
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div id="left" class="span3">
+					@RenderSection("LeftBanner", false)
+				</div>
+				<div id="right" class="span9">
+					<div class="container-fluid">
+						@RenderSection("BreadCrumb", false)
+					</div>
+					@*<div class="container-fluid">
+						<div class="span12">
+							<ul class="breadcrumb">
+								<li>
+									<a href="#">首页</a> <span class="divider">/</span>
+								</li>
+								<li>
+									<a href="#">类库</a> <span class="divider">/</span>
+								</li>
+								<li class="active">数据</li>
+							</ul>
+						</div>
+					</div>*@
+					<!-- Content -->
+					<div class="container-fluid">
+						@RenderBody()
+					</div>
+					<!-- End Content -->
+				</div>
+			</div>
+		</div>
+		<a href="javascript:;" id="toTop" title="返回顶部" ></a>
+		<div class="navbar navbar-fixed-bottom">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>					
+					<a class="brand" href="#">常伟华的博客</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li><a target="_blank" href="http://www.cmono.net">CMONO.NET</a></li>	
+							<li><a href="@Url.Action("CopyRight", "Global")">&copy; All Rights Reserved</a></li>
+							<li><a href="#"></a></li>
+                            
+						</ul>
+                        @RenderSection("Footer", false)
+                        @if (ViewData.ContainsKey("ExecutionTime"))
+                        {
+                           <p class="navbar-text pull-right">Execution Time: @ViewData["ExecutionTime"] ms.Default</p>
+                        }
+                        else
+                        { 
+                            <p class="navbar-text pull-right">作者：<a href="http://www.cmono.net/about/">常伟华</a></p>
+                        }
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=3&amp;pos=right&amp;uid=742932" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    var bds_config = { "bdTop": 164 };
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date() / 3600000);
+</script>
+<!-- Baidu Button END -->
+    
+</body>
+</html>

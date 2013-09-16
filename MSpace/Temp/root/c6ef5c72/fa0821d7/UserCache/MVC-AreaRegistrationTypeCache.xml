@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--此文件自动生成。请不要修改此文件的内容。-->
-<typeCache lastModified="2013/3/17 14:48:31" mvcVersionId="3cff62e5-ef21-4e58-897f-d0f1eafd3beb">
+<typeCache lastModified="2013/3/17 15:14:21" mvcVersionId="3cff62e5-ef21-4e58-897f-d0f1eafd3beb">
   <assembly name="MSpace, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <module versionId="bcf7cf8e-abe7-4ce9-a93a-89c5037dc990">
+    <module versionId="c9ffe99b-fa71-40c3-a25a-157c7b16b6a0">
       <type>MSpace.Areas.Admin.AdminAreaRegistration</type>
       <type>MSpace.Areas.M.MAreaRegistration</type>
     </module>

@@ -73,6 +73,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.84.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.84.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.84.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.1.0.84.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -167,6 +175,7 @@
     <Compile Include="Controllers\GlobalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\PluginController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -185,6 +194,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201303170648413_InitialCreate.cs" />
+    <Compile Include="Migrations\201303170648413_InitialCreate.Designer.cs">
+      <DependentUpon>201303170648413_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\AlbumImage.cs" />
@@ -224,8 +238,8 @@
     <Compile Include="Repository\ContactGroupRepository.cs" />
     <Compile Include="Repository\ContactRepository.cs" />
     <Compile Include="Repository\MessageRepository.cs" />
-    <Compile Include="Repository\MSpaceContext.cs" />
-    <Compile Include="Repository\MSpaceContextInitializer.cs" />
+    <Compile Include="Repository\MSpaceDB.cs" />
+    <Compile Include="Repository\MSpaceDBInitializer.cs" />
     <Compile Include="Repository\MUserRepository.cs" />
     <Compile Include="Repository\PrivateMessageReplyRepository.cs" />
     <Compile Include="Repository\PrivateMessageRepository.cs" />
@@ -239,6 +253,7 @@
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\123.jpg" />
     <Content Include="Content\200913014060_2.jpg" />
     <Content Include="Content\admin\css\bootmetro-charms.css" />
     <Content Include="Content\admin\css\bootmetro-icons-ie7.css" />
@@ -393,6 +408,15 @@
     <Content Include="Content\admin\scripts\modernizr-2.6.1.min.js" />
     <Content Include="Content\admin\scripts\mustache.js" />
     <Content Include="Content\books.xml" />
+    <Content Include="Content\Default.jpg" />
+    <Content Include="Content\templates\bootstrap3\css\bootstrap-theme.css" />
+    <Content Include="Content\templates\bootstrap3\css\bootstrap-theme.min.css" />
+    <Content Include="Content\templates\bootstrap3\css\bootstrap.css" />
+    <Content Include="Content\templates\bootstrap3\css\bootstrap.min.css" />
+    <Content Include="Content\templates\bootstrap3\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\templates\bootstrap3\js\application.js" />
+    <Content Include="Content\templates\bootstrap3\js\bootstrap.js" />
+    <Content Include="Content\templates\bootstrap3\js\bootstrap.min.js" />
     <Content Include="Content\close-x.png" />
     <Content Include="Content\css\shiningborder.css" />
     <Content Include="Content\default.png" />
@@ -1583,6 +1607,31 @@
     <Content Include="Content\m\styles\Uniform\slider-h.gif" />
     <Content Include="Content\m\styles\Uniform\slider-v.gif" />
     <Content Include="Content\m\styles\Uniform\sprite.png" />
+    <Content Include="Content\templates\bootstrap3\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\templates\bootstrap3\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\templates\bootstrap3\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Scripts\jquery-2.0.2.intellisense.js" />
+    <Content Include="Content\templates\bootstrap3\js\chance.js" />
+    <Content Include="Content\templates\bootstrap3\js\customizer.js" />
+    <Content Include="Content\templates\bootstrap3\js\filesaver.js" />
+    <Content Include="Content\templates\bootstrap3\js\holder.js" />
+    <Content Include="Content\templates\bootstrap3\js\html5shiv.js" />
+    <Content Include="Content\templates\bootstrap3\js\jquery.js" />
+    <Content Include="Content\templates\bootstrap3\js\jszip.js" />
+    <Content Include="Content\templates\bootstrap3\js\less.js" />
+    <Content Include="Content\templates\bootstrap3\js\raw-files.js" />
+    <Content Include="Content\templates\bootstrap3\js\require.js" />
+    <Content Include="Content\templates\bootstrap3\js\respond.min.js" />
+    <Content Include="Content\templates\bootstrap3\js\uglify.js" />
+    <Content Include="Scripts\jquery-2.0.2.js" />
+    <Content Include="Scripts\jquery-2.0.2.min.js" />
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Admin\Views\Gallary\UploadSingle.cshtml" />
     <None Include="Content\m\vsdoc\kendo.web-vsdoc.js" />
     <Content Include="Content\photos\css\style.css" />
     <Content Include="Content\photos\images\08_diagonals_thick.png" />
@@ -2487,13 +2536,14 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <None Include="Properties\PublishProfiles\release.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Scripts\fancyInput.css" />
     <Content Include="Scripts\fancyInput.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Scripts\jquery-ui-1.10.0.min.js.map" />
+    <Content Include="Scripts\jquery-2.0.2.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
@@ -2538,61 +2588,120 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map" />
-    <Content Include="Views\About\Experience.cshtml" />
-    <Content Include="Views\About\Index.cshtml" />
-    <Content Include="Views\About\Plan.cshtml" />
-    <Content Include="Views\About\Resume.cshtml" />
-    <Content Include="Views\Account\LogOn.cshtml" />
-    <Content Include="Views\Account\LogOnSuccess.cshtml" />
-    <Content Include="Views\ArticleComment\Comment.cshtml" />
-    <Content Include="Views\ArticleComment\ListArticleComment.cshtml" />
-    <Content Include="Views\Article\AjaxIndex.cshtml" />
-    <Content Include="Views\Article\Comment.cshtml" />
-    <Content Include="Views\Article\Index.cshtml" />
-    <Content Include="Views\Article\Read.cshtml" />
-    <Content Include="Views\Article\RelatedArticle.cshtml" />
-    <Content Include="Views\Document\Browse.cshtml" />
-    <Content Include="Views\Gallary\Index.cshtml" />
-    <Content Include="Views\Gallary\Water.cshtml" />
-    <Content Include="Views\Gallary\Water2.cshtml" />
-    <Content Include="Views\Gallary\WaterFall.cshtml" />
-    <Content Include="Views\GlobalAsync\Component.cshtml" />
-    <Content Include="Views\GlobalAsync\FamousWord.cshtml" />
-    <Content Include="Views\Global\BlogRoll.cshtml" />
-    <Content Include="Views\Global\Component.cshtml" />
-    <Content Include="Views\Global\CopyRight.cshtml" />
-    <Content Include="Views\Global\FamousWord.cshtml" />
-    <Content Include="Views\Global\Footer.cshtml" />
-    <Content Include="Views\Global\Header.cshtml" />
-    <Content Include="Views\Global\Online.cshtml" />
-    <Content Include="Views\Global\Outline.cshtml" />
-    <Content Include="Views\Global\Twitter.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Album.cshtml" />
-    <Content Include="Views\Home\Gallary.cshtml" />
-    <Content Include="Views\Home\Gallary2.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\RSS.cshtml" />
-    <Content Include="Views\Message\Index.cshtml" />
-    <Content Include="Views\Message\Publish.cshtml" />
-    <Content Include="Views\Message\副本 Publish.cshtml" />
-    <Content Include="Views\Shared\ArticleTempalte.cshtml" />
-    <Content Include="Views\Shared\BlankTemplate.cshtml" />
-    <Content Include="Views\Test\Create.cshtml" />
-    <Content Include="Views\Test\DownLoad.cshtml" />
-    <Content Include="Views\Test\Ex.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
-    <Content Include="Views\Test\JsRender.cshtml" />
-    <Content Include="Views\Test\TestJS.cshtml" />
-    <Content Include="Views\Test\ThirdParty.cshtml" />
-    <Content Include="Views\User\ForgetPassword.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Templates\Default\Test\Create.cshtml" />
+    <Content Include="Views\Templates\Default\Test\DownLoad.cshtml" />
+    <Content Include="Views\Templates\Default\Test\Ex.cshtml" />
+    <Content Include="Views\Templates\Default\Test\Index.cshtml" />
+    <Content Include="Views\Templates\Default\Test\JsRender.cshtml" />
+    <Content Include="Views\Templates\Default\Test\TestJS.cshtml" />
+    <Content Include="Views\Templates\Default\Test\ThirdParty.cshtml" />
+    <Content Include="Views\Templates\Default\User\ForgetPassword.cshtml" />
+    <Content Include="Views\Templates\Default\User\Login.cshtml" />
+    <Content Include="Views\Templates\Default\User\Register.cshtml" />
+    <Content Include="Views\Templates\Default\_ViewStart.cshtml" />
+    <Content Include="Views\Templates\Default\Shared\_Layout.cshtml" />
+    <Content Include="Views\Templates\Default\Shared\ArticleTempalte.cshtml" />
+    <Content Include="Views\Templates\Default\Shared\BlankTemplate.cshtml" />
+    <Content Include="Views\Templates\Default\Shared\Error.cshtml" />
+    <Content Include="Views\Templates\Default\Message\Index.cshtml" />
+    <Content Include="Views\Templates\Default\Message\Publish.cshtml" />
+    <Content Include="Views\Templates\Default\Message\副本 Publish.cshtml" />
+    <Content Include="Views\Templates\Default\Home\About.cshtml" />
+    <Content Include="Views\Templates\Default\Home\Album.cshtml" />
+    <Content Include="Views\Templates\Default\Home\Gallary.cshtml" />
+    <Content Include="Views\Templates\Default\Home\Gallary2.cshtml" />
+    <Content Include="Views\Templates\Default\Home\Index.cshtml" />
+    <Content Include="Views\Templates\Default\Home\Login.cshtml" />
+    <Content Include="Views\Templates\Default\Home\RSS.cshtml" />
+    <Content Include="Views\Templates\Default\GlobalAsync\Component.cshtml" />
+    <Content Include="Views\Templates\Default\GlobalAsync\FamousWord.cshtml" />
+    <Content Include="Views\Templates\Default\Global\BlogRoll.cshtml" />
+    <Content Include="Views\Templates\Default\Global\Component.cshtml" />
+    <Content Include="Views\Templates\Default\Global\CopyRight.cshtml" />
+    <Content Include="Views\Templates\Default\Global\FamousWord.cshtml" />
+    <Content Include="Views\Templates\Default\Global\Footer.cshtml" />
+    <Content Include="Views\Templates\Default\Global\Header.cshtml" />
+    <Content Include="Views\Templates\Default\Global\Online.cshtml" />
+    <Content Include="Views\Templates\Default\Global\Outline.cshtml" />
+    <Content Include="Views\Templates\Default\Global\Twitter.cshtml" />
+    <Content Include="Views\Templates\Default\Gallary\Index.cshtml" />
+    <Content Include="Views\Templates\Default\Gallary\Water.cshtml" />
+    <Content Include="Views\Templates\Default\Gallary\Water2.cshtml" />
+    <Content Include="Views\Templates\Default\Gallary\WaterFall.cshtml" />
+    <Content Include="Views\Templates\Default\Document\Browse.cshtml" />
+    <Content Include="Views\Templates\Default\ArticleComment\Comment.cshtml" />
+    <Content Include="Views\Templates\Default\ArticleComment\ListArticleComment.cshtml" />
+    <Content Include="Views\Templates\Default\Article\AjaxIndex.cshtml" />
+    <Content Include="Views\Templates\Default\Article\Comment.cshtml" />
+    <Content Include="Views\Templates\Default\Article\Index.cshtml" />
+    <Content Include="Views\Templates\Default\Article\Read.cshtml" />
+    <Content Include="Views\Templates\Default\Article\RelatedArticle.cshtml" />
+    <Content Include="Views\Templates\Default\Account\LogOn.cshtml" />
+    <Content Include="Views\Templates\Default\Account\LogOnSuccess.cshtml" />
+    <Content Include="Views\Templates\Default\About\Experience.cshtml" />
+    <Content Include="Views\Templates\Default\About\Index.cshtml" />
+    <Content Include="Views\Templates\Default\About\Plan.cshtml" />
+    <Content Include="Views\Templates\Default\About\Resume.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\About\Experience.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\About\Index.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\About\Plan.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\About\Resume.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Account\LogOn.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Account\LogOnSuccess.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Article\AjaxIndex.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Article\Comment.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Article\Index.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Article\Read.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Article\RelatedArticle.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\ArticleComment\Comment.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\ArticleComment\ListArticleComment.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Document\Browse.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Gallary\Index.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Gallary\Water.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Gallary\Water2.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Gallary\WaterFall.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Global\BlogRoll.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Global\Component.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Global\CopyRight.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Global\FamousWord.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Global\Footer.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Global\Header.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Global\Online.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Global\Outline.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Global\Twitter.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\GlobalAsync\Component.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\GlobalAsync\FamousWord.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Home\About.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Home\Album.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Home\Gallary.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Home\Gallary2.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Home\Index.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Home\Login.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Home\RSS.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Message\Index.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Message\Publish.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Message\副本 Publish.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Shared\_Layout.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Shared\ArticleTempalte.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Shared\BlankTemplate.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Shared\Error.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Test\Create.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Test\DownLoad.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Test\Ex.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Test\Index.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Test\JsRender.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Test\TestJS.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Test\ThirdParty.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\User\ForgetPassword.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\User\Login.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\User\Register.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\_ViewStart.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Home\Index2.cshtml" />
+    <Content Include="Views\Templates\Default\Home\Index2.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Module\LeftBanner.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Module\BreadCrumb.cshtml" />
+    <Content Include="Views\Templates\Bootstrap3\Module\BlogRoll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2600,9 +2709,15 @@
     <Folder Include="Content\map\baidu\api\" />
     <Folder Include="Filters\Result\" />
     <Folder Include="Plugins\" />
+    <Folder Include="Views\Module\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201303170648413_InitialCreate.resx">
+      <DependentUpon>201303170648413_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

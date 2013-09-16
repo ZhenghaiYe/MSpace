@@ -1,0 +1,269 @@
+﻿@model MSpace.Models.MUser
+@{
+    ViewBag.Title = "Register";
+}
+
+@section scripts{
+    @*<link rel="stylesheet" href="@Url.Content("~/Content/widget/smartwizard/styles/smart_wizard.css")" />
+    <script src="@Url.Content("~/Content/widget/smartwizard/js/jquery.smartWizard-2.0.js")" type="text/javascript"></script>*@
+
+    <style type="text/css">
+
+    </style>
+     
+    <script type="text/javascript">
+
+        $(function () {
+            //$('#wizard1').smartWizard({ transitionEffect: 'fade', onFinish: onFinishCallback });
+            
+            //function onFinishCallback() {
+            //    alert('Finish Called');
+            //}
+           
+        });
+    </script>
+}
+
+@section BreadCrumb{
+    <div class="span12">
+        <ul class="breadcrumb">
+            <li>
+                <a href="#">注册</a><span class="divider">/</span>
+            </li>
+            <li class="active">第一步：填写会员信息</li>
+        </ul>
+    </div>
+}
+
+@section LeftBanner{
+    <div class="row-fluid">
+        <div class="alert-info alert">
+            <h6 class="alert-heading">注册协议</h6>
+            <ol>
+                <li>用户必须尊重开发者的劳动</li>
+                <li>可以进行二次开发，但是不能进行商业活动</li>
+            </ol>
+        </div>
+    </div>
+}
+
+<div class="row-fluid">
+    <div style="margin-left:10%;">
+        <ul class="inline">
+            <li style="width:30%;"><blockquote><i></i><span class="badge badge-info">1</span> <strong>填写会员信息</strong></blockquote></li>
+            <li style="width:30%;"><blockquote><i></i><span class="badge badge-inverse">2</span> <strong>通过邮箱验证</strong></blockquote></li>
+            <li style="width:30%;"><blockquote><i></i><span class="badge badge-inverse">3</span> <strong>注册成功</strong></blockquote></li>
+        </ul>
+    </div>
+    <div>
+        <div>
+            @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @class = "form-horizontal"}))
+            {
+                @*Html.ValidationSummary(excludePropertyErrors: true)*@
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>会员注册</legend>
+                    <div class="control-group">
+                        <label class="control-label" for="Email">电子邮箱</label>
+                        <div class="controls">
+                            @Html.TextBox("Email","",new { @class = "input-xlarge", placeholder = "请填写常用的邮箱" })
+                            <p class="help-block">请填写真实邮箱,用于激活您的账号 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "label label-warning" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="UserName">用户名</label>
+                        <div class="controls">
+                            @Html.TextBox("UserName","",new { @class = "input-xlarge", placeholder = "全站唯一，慎重填写" })
+                            <p class="help-block">6~20个字符，包括字母、数字、下划线，必须以字母开头</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Password">密码</label>
+                        <div class="controls">
+                            @Html.Password("Password","",new { @class = "input-xlarge" })
+                            <p class="help-block">6~16个字符，包括字母、数字、特殊符号，区分大小写</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="RePassword">确认密码</label>
+                        <div class="controls">
+                            @Html.Password("RePassword","",new { @class = "input-xlarge" })
+                            <p class="help-block">请再次输入密码</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="NickName">昵称</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.NickName, new { @class = "input-xlarge" })
+                            <p class="help-block">1~16个字符</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Gender">性别</label>
+                        <div class="controls">
+                            @Html.RadioButtonFor(m=>m.Gender, "1") 男
+                            @Html.RadioButtonFor(m=>m.Gender, "0") 女
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Province">居住地</label>
+                        <div class="controls">
+                            <select class="input-medium" name="Province" id="Province">
+                                <option>---请选择省份---</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                            <select class="span2" name="City" id="City">
+                                <option></option>
+                            </select>
+                            <p class="help-block">请选择您的居住区域!</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="CheckCode">验证码</label>
+                        <div class="controls">
+                            <input type="text" name="CheckCode" class = "input-xlarge" />
+                            <p class="help-block">
+                                <img id="verificationcode" src="@Url.Action("VerificationCode", "User")" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" ></label>
+                        <div class="controls">
+                            <input type="submit" class = "btn btn-primary" value="提交注册" />
+                            <p class="help-block">
+                                
+                            </p>
+                        </div>
+                    </div>
+                </fieldset>
+            }
+        </div>
+    </div>
+
+    @*验证邮件步骤*@
+    <div style="margin-left:10%;">
+        <div>
+            <p>注册第二步，请打开邮箱 (<a href="mailto:dyelcwh@yeah.net">dyelcwh@yeah.net</a>) 收取账号激活邮件，并点击邮件中的激活链接，方可使用该账号。</p> 
+            <p>如果您一直收不到激活邮件，请检查：</p>
+        </div>
+        <div class="alert alert-info" style="width:75%;">
+            <a class="close" data-dismiss="alert">&times;</a>
+            <h4 class="alert-heading">Warning!</h4>
+            @*<ol>
+                <li>请确认是否填写正确的邮箱地址：<a href="mailto:dyelcwh@yeah.net">dyelcwh@yeah.net</a></li>
+                <li>请注意查看您邮箱中的垃圾邮件，可能 邮件被误杀</li>
+            </ol>*@
+            <p></p>
+            <p>1. 请确认是否填写正确的邮箱地址：<a href="mailto:dyelcwh@yeah.net">dyelcwh@yeah.net</a></p>
+            <p>2. 请注意查看您邮箱中的垃圾邮件，可能 <strong>邮件被误杀</strong></p>
+        </div>
+    </div>
+</div>
+
+@Context.Request.Params["step"]
+
+@*废弃*@
+@*<div class="row-fluid">
+<div id="wizard1" class="swMain">
+  			<ul>
+  				<li><a href="#step-1">
+                <label class="stepNumber">1</label>
+                <span class="stepDesc">
+                   Step 1<br />
+                   <small>Step 1 description</small>
+                </span>
+            </a></li>
+  				<li><a href="#step-2">
+                <label class="stepNumber">2</label>
+                <span class="stepDesc">
+                   Step 2<br />
+                   <small>Step 2 description</small>
+                </span>
+            </a></li>
+  				<li><a href="#step-3">
+                <label class="stepNumber">3</label>
+                <span class="stepDesc">
+                   Step 3<br />
+                   <small>Step 3 description</small>
+                </span>                   
+             </a>
+  			</ul>
+  			<div id="step-1">	
+            <h2 class="StepTitle">Step 1 Content</h2>
+            <ul type="disk">
+  				    <li>List 1</li>
+  				    <li>List 2</li>
+            </ul>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>          			
+        </div>
+  			<div id="step-2">
+            <h2 class="StepTitle">Step 2 Content</h2>	
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p> 
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>          
+        </div>                      
+  			<div id="step-3">
+            <h2 class="StepTitle">Step 3 Content</h2>	
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>               				          
+        </div>
+  		</div>   </div>*@

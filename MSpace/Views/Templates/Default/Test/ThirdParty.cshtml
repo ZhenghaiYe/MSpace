@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "ThirdParty";
+}
+
+<a href="http://openapi.baidu.com/oauth/2.0/authorize?response_type=code&client_id=0HThj8SLYObvpuG4ZvAcTMDZ&redirect_uri=http://localhost&scope=super_msg&state=eadfe44b7a3021b0f9dd456e7ed76998&display=page"><img src="http://dev.baidu.com/wiki/static/connect/images/standard/login-long.png" /></a>
+<img src="http://dev.baidu.com/wiki/static/connect/images/standard/logout-long.png" />
+<img src="http://dev.baidu.com/wiki/static/connect/images/standard/login-short.png" />
+<img src="http://dev.baidu.com/wiki/static/connect/images/standard/logout-short.png" />
+
+<script src="@Url.Content("~/Scripts/ThirdParty.js")" type="text/javascript"></script>
+<script type="text/javascript" src="http://openapi.baidu.com/connect/js/v2.0/featureloader"></script>
+<script type="text/javascript">
+    baidu.require('connect', function (connect) {
+        connect.init('2EX8UyDLBnrLde93F1o6FEmV');
+    });
+</script>

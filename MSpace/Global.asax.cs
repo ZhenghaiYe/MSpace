@@ -81,6 +81,26 @@ namespace MSpace
            
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            RegistTemplate("Bootstrap3");
+        }
+
+        static void RegistTemplate(string templateName = "Default")
+        {
+            RazorViewEngine engine = ViewEngines.Engines.Where(e => e is RazorViewEngine).Single() as RazorViewEngine;
+            engine.ViewLocationFormats = engine.PartialViewLocationFormats = engine.MasterLocationFormats = new string[]{
+                 "~/Views/Templates/"+templateName+"/{1}/{0}.cshtml",
+                 "~/Views/Templates/"+templateName+"/{1}/{0}.vbhtml",
+                 "~/Views/Templates/"+templateName+"/{1}/Shared/{0}.cshtml",
+                 "~/Views/Templates/"+templateName+"/{1}/Shared/{0}.vbhtml",
+                 "~/Views/Templates/"+templateName+"/{0}.cshtml",
+                 "~/Views/Templates/"+templateName+"/{0}.vbhtml",
+                 "~/Views/Templates/"+templateName+"/Shared/{0}.cshtml",
+                 "~/Views/Templates/"+templateName+"/Shared/{0}.vbhtml"
+            };
+
+            //engine.AreaMasterLocationFormats = engine.AreaPartialViewLocationFormats = engine.AreaViewLocationFormats = null;
+
         }
     }
 }

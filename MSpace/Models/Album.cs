@@ -50,5 +50,7 @@ namespace MSpace.Models
         public string Privacy { get; set; }
         [Display(Name = "相册封面")]
         public string Cover { get; set; }
+
+       
     }
 }

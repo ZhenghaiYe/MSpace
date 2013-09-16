@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Global/FamousWord.cshtml" hash="ffffffff9bdefc2c" filehash="ffffd5b61d461756" flags="110000" assembly="App_Web_dver1tro" type="ASP._Page_Views_Global_FamousWord_cshtml">
+<preserve resultType="2" virtualPath="/Views/Global/FamousWord.cshtml" hash="ffffffff9bdefc2c" filehash="ffffd5b61d461756" flags="110000" assembly="App_Web_gremenj3" type="ASP._Page_Views_Global_FamousWord_cshtml">
     <filedeps>
         <filedep name="/Views/Global/FamousWord.cshtml" />
     </filedeps>

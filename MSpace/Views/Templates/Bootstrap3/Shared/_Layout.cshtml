@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" type="image/x-icon" href="@Url.Content("~/Content/favicon.ico")" />
+		<style type="text/css">
+			body {
+				padding-top: 70px;
+				padding-bottom: 40px;
+			}
+			form {
+				margin: 0;
+			}
+			textarea {
+				display: block;
+			}
+			
+			#toTop{width:67px;height:114px;background:url('@Url.Content("~/Content/toTop.gif")');position:fixed;bottom:55px;left:25px;display:none;}
+		</style>
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link href="@Url.Content("~/Content/templates/bootstrap3/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+	<link href="@Url.Content("~/Content/templates/bootstrap/css/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+	
+    <script src="@Url.Content("~/Content/templates/bootstrap3/js/require.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/templates/bootstrap3/js/jquery.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Content/templates/bootstrap3/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/templates/bootstrap3/js/respond.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/jquery.transit.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script> 
+           
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="@Url.Content("~/Content/templates/bootstrap3/js/html5shiv.js")"></script>
+      <script src="@Url.Content("~/Content/templates/bootstrap3/js/respond.min.js")"></script>
+    <![endif]-->
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+	<script type="text/javascript">
+		$(function () {
+			
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 100) {
+					$('#toTop').fadeIn();
+				} else {
+					$('#toTop').fadeOut();
+				}
+			});
+			$("#toTop").click(function () {
+				$("html,body").animate({ scrollTop: 0 }, "slow");
+				return false;
+			});
+
+		});
+	</script>
+
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">博客</a>
+            </div>
+        
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a class="active" href="@Url.RouteUrl("DefaultRoute", new { controller="Home", action="Index" })"><i class="icon-home"></i> 首页</a></li>
+			        <li><a href="@Url.RouteUrl("DefaultRoute", new { controller="Home", action="About" })"><i class="icon-file"></i> 关于</a></li>
+				    <li><a href="@Url.RouteUrl("DefaultRoute", new { controller="Article", action="Index" })"><i class="icon-list"></i> 文章</a></li>
+				    <li><a href="@Url.RouteUrl("DefaultRoute", new { controller="Gallary", action="Index" })"><i class="icon-picture"></i> 相册</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" class="form-control">
+                        </div>
+                    <button type="submit" class="btn btn-success">Sign in</button>
+                </form>
+                @RenderSection("Login", false)
+            </div><!--/.navbar-collapse -->
+        </div>
+    </div>
+			
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 ">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @Html.Action("LeftBanner", "Module")
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 ">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @Html.Action("BreadCrumb", "Module")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        @Html.Action("BlogRoll", "Module")
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+    
+    
+		
+			
+	<a href="javascript:;" id="toTop" title="返回顶部" ></a>
+        
+                        
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-bottom">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">工具栏</a>
+            </div>
+        
+            <div class="navbar-bottom collapse">
+                <ul class="nav navbar-nav">
+                    <li><a class="active" href="@Url.RouteUrl("DefaultRoute", new { controller="Home", action="Index" })"><i class="icon-home"></i> 首页</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        @RenderSection("Footer", false)
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                @if (ViewData.ContainsKey("ExecutionTime"))
+                        {
+                           <p class="navbar-text pull-right">Execution Time: @ViewData["ExecutionTime"] ms. Bootstrap3</p>
+                        }
+                        else
+                        { 
+                            <p class="navbar-text pull-right">作者：<a href="http://www.cmono.net/about/">常伟华</a></p>
+                        }
+            </div><!--/.navbar-collapse -->
+        </div>
+    </div>
+	
+    <script type="text/javascript">
+        requirejs.config({
+            paths: {
+                jquery: [
+                    '//code.jquery.com/jquery',
+                    '//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.1.min'
+                ]
+            }
+        });
+    </script>
+    @RenderSection("scripts", false)
+    </body>
+</html>

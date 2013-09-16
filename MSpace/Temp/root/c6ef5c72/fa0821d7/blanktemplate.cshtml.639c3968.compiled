@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Shared/BlankTemplate.cshtml" hash="ffffffff9bdefc2c" filehash="1cc8fe052385" flags="110000" assembly="App_Web_0gopls0s" type="ASP._Page_Views_Shared_BlankTemplate_cshtml">
+<preserve resultType="2" virtualPath="/Views/Shared/BlankTemplate.cshtml" hash="ffffffff9bdefc2c" filehash="1cc8fe052385" flags="110000" assembly="App_Web_d43jau0l" type="ASP._Page_Views_Shared_BlankTemplate_cshtml">
     <filedeps>
         <filedep name="/Views/Shared/BlankTemplate.cshtml" />
     </filedeps>

@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "常伟华的博客平台";
+}
+@section scripts{
+   
+    <script type="text/javascript">
+        $(function () {
+        });
+    </script>
+}
+
+@section Login{
+
+}                                                                                                            
+
+
+
+<script type="text/javascript">
+    $(function () {
+
+    });
+
+</script>
+
+<script src="@Url.Content("~/Scripts/jQuery.tmpl.js")" type="text/javascript"></script>
+<script id="twitterTemplate" type="text/x-jquery-tmpl">
+    <li><em>${Content}</em> -- ${PubDate}</li>
+</script>
+<script id="articleTemplate" type="text/x-jquery-tmpl">
+    <li><em>${Title}</em>--${PubDate}</li>
+</script>
+<script id="newsTemplate" type="text/x-jquery-tmpl">
+    <li>${PublishDate} ==>> <em>${Content}</em></li>
+</script>
+
+<script type="text/javascript">
+   
+    require('jquery', function () {
+        console.log('jquery loaded');
+    });
+
+    function LoadData(template, target, url) {
+        $.ajax({
+            url: url,
+            cache: false,
+            beforeSend: function () {
+                
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                $('#' + template + '').tmpl(data).appendTo('#' + target + '');
+            }
+        });
+    }
+
+
+</script>

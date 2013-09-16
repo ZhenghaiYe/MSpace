@@ -1,0 +1,2 @@
+2013-09-02 21:02:55.3879 <no type>.lambda_method => GallaryController.Upload => AlbumImageRepository.Add 添加记录
+2013-09-02 21:03:19.3668 <no type>.lambda_method => GallaryController.Upload => AlbumImageRepository.Add 添加记录

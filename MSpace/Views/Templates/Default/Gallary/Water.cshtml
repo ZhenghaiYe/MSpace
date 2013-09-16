@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Water";
+    Layout = "~/Views/Shared/BlankTemplate.cshtml";
+}
+
+ @section Scripts{
+    <script type="text/javascript" src="@Url.Content("~/Content/widgets/masonry/js/jquery-1.7.1.min.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/widgets/masonry/jquery.masonry.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/widgets/masonry/js/jquery.infinitescroll.min.js")" ></script>
+    @*<link href="@Url.Content("~/Content/widgets/masonry/css/style.css")" rel="stylesheet" type="text/css" />*@
+    @*<link href="@Url.Content("~/Content/css/shiningborder.css")" rel="stylesheet" type="text/css" />*@
+    <style type="text/css">
+    .item {
+        width: 220px;
+        height: 400px;
+        margin: 5px;
+        float: left;
+        border: 1px solid #ccc;
+        background: #eee;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    .h01 {
+        height: 100px;  
+    }
+
+    .h02 {
+        height: 200px;
+    }
+
+    .h03 {
+        height: 300px;  
+    }
+
+    .h04 {
+        height: 400px;  
+    }
+
+    #infscr-loading {
+        margin-left: -100px;
+        width: 200px;
+        position: fixed;
+        left: 50%;
+        bottom: 10px;
+        text-align: center;
+    }
+
+    img
+    {
+        width:200px;
+        height:350px;
+    }
+
+    </style>
+
+    <script type="text/javascript"> 
+        $(function () {
+            var i = 1;
+
+            var $container = $('#container');
+
+            $container.imagesLoaded(function () {
+                $container.masonry({
+                    itemSelector: '.item'
+                });
+            });
+
+            $container.infinitescroll({
+                navSelector: '#page-nav',    // selector for the paged navigation 
+                nextSelector: '#page-nav a',  // selector for the NEXT link (to page 2)
+                itemSelector: '.item',     // selector for all items you'll retrieve
+                extraScrollPx: 75,
+                loading: {
+                    finishedMsg: '没有了',
+                    img: '@Url.Content("~/Content/loading6.gif")'
+                }
+            },
+            // trigger Masonry as a callback
+            function (newElements) {
+                //var arr = [];
+                //<div class=\"item\"><img src='http://localhost:32065/Images/图像 057.png'/></div>
+                //$.each(newElements, function (i, item) {
+                    //var item = '<div class="item"><img src="' + item.Url + '"/>' + item.Name + '</div>';
+                    //arr.push(item);
+                //});
+                  // hide new items while they are loading
+                var $newElems = $(newElements).css({ opacity: 0 });
+                  // ensure that images load before adding to masonry layout
+                  $newElems.imagesLoaded(function () {
+                      // show elems now they're ready
+                      $newElems.animate({ opacity: 1 });
+                      $container.masonry('appended', $newElems, true);
+                  });
+
+                  $('').html('<a href="/Gallary/Page/' + (++i) + '"></a>');
+
+              }
+            );
+
+            //$container.find("a").each(function () {
+            //    $(this).hover(function () {
+            //        $(this).siblings().find(".zhezhao").stop();
+            //        $(this).siblings().find(".zhezhao").fadeTo("fast", 0.3);
+            //    },
+            //    function () {
+            //        $(this).siblings().find(".zhezhao").stop();
+            //        $(this).siblings().find(".zhezhao").fadeTo("fast", 0);
+            //    });
+            //});
+
+            //高亮显示当前，其余开启遮罩
+            $(".item").live('mouseover',function () {
+                $(this).stop().fadeTo('3', 1).siblings().stop().fadeTo('3', 0.3);
+            }).live('mouseleave', function () {
+                $(".item").stop().fadeTo('3', 1)
+            });
+
+        });
+
+</script>
+
+}
+
+<div style="position:fixed;right:15px;top:100px;"><input type="button" id="prepend" value="刷新" /><input type="button" id="append" value="下一页" /></div>
+<div id="container">
+    <div class="item border start">ssss</div><div class="item">ssss</div><div class="item">ssss</div><div class="item">ssss</div><div class="item">ssss</div><div class="item">ssss</div><div class="item">ssss</div>
+    <div class="item">ssss</div><div class="item">ssss</div><div class="item">ssss</div><div class="item">ssss</div><div class="item">ssss</div><div class="item">ssss</div><div class="item">ssss</div>
+</div>
+<div id="page-nav">
+    <a href="@Url.Action("Page",new { Id=ViewBag.PageIndex})"></a>
+</div>

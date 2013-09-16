@@ -21,6 +21,11 @@ namespace MSpace.Controllers
             return View();
         }
 
+        public ActionResult Index2()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.AuthorName = "常伟华";

@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+@section LeftBanner{
+    <div class="row-fluid">
+        <div>
+            @Html.Action("Publish")
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jsrender.js")"></script>
+}
+
+
+<div class="alert alert-info alert-block">
+    <a id="refreshMessage" class="close"><i class="icon-refresh"></i></a>
+    <h4 class="alert-heading"><i class="icon-leaf"></i> <em>留言</em></h4>
+    <hr />
+    <div id="messageArea" class="alert-body">
+        
+    </div>
+</div>
+
+
+
+<script type="text/x-jsrender" id="messageTemplate">
+    {{for messages}}
+        <div class="media">
+            <a class="pull-left" target="_blank" href="#">
+                <img class="media-object img-rounded" src="http://www.gravatar.com/avatar/{{:hash}}.png?s=75&d=monsterid&r=g" />
+            </a>
+            <div class="media-body">
+                @*<h4 class="media-heading"><strong>{{:name}}</strong><small> == </small><em>{{:pubDate}}</em></h4>*@
+                <blockquote class="pull-right">
+                    <p class="muted">{{:content}}</p>
+                    <span class="badge">{{:pubDate}}</span> by <span class="label label-info">{{:name}}</span>
+                </blockquote>
+                @*<p class="muted">{{:content}}</p>*@
+            </div>
+        </div>
+        <hr />
+    {{/for}}
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        //art.dialog({ content: '1111' }).time(2500);
+        $('#publishMessage').on('click', function (e) {
+            //e.preventDefault();
+            var url = '@Url.Action("Publish", "Message")';
+            if ($('#sendAsPrivate').is(':checked') == true) {
+                url = '@Url.RouteUrl("AdminRoute", new { controller = "PrivateMessage", action = "Publish" })';
+            }
+            
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data:  $('#messageForm').serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    $(':input').val('');
+                    loadMessage();
+                    art.dialog({ content: data.msg }).time(2500);
+                },
+                beforeSend: function () {
+                    //$(this).attr('disabled', 'disabled');
+                }
+            });
+        });
+
+        $('#refreshMessage').on('click', function (e) {
+            e.preventDefault();
+            loadMessage();
+        });
+
+        loadMessage();
+    });
+
+    function loadMessage() {
+        $.ajax({
+            url: '@Url.Action("List","Message")',
+            dataType: 'json',
+            success: function (data) {
+                $("#messageArea").empty();
+                var html = $("#messageTemplate").render(data);
+                //Insert into Container
+                $("#messageArea").append(html);
+                $(this).parent().slideDown('slow');
+            },
+            beforeSend: function () {
+                $(this).parent().slideUp('slow');
+            }
+        });
+    }
+
+</script>
